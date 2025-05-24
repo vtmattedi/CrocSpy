@@ -141,7 +141,10 @@ export const GlobalProvider = ({ children }) => {
                         textIndent: '1em',
                     }}
                 >
-                    {getCurrentAlert()?.text}
+                    <div style={{ textAlign: 'justify' }}>
+
+                        {getCurrentAlert()?.text}
+                    </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={closeAlert} variant='danger'>Close</Button>

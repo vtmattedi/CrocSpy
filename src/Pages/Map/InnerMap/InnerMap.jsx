@@ -6,12 +6,32 @@ import { db } from '../../../../db';
 import { useLiveQuery } from 'dexie-react-hooks';
 import croclock from '../../../assets/croclockhomes.png';
 import { useNavigate } from 'react-router-dom';
+import { useGlobalContext } from '../../../Contexts/GlobalContext';
+import ImgEqualizer from '../../../Components/ImgEqualizer/ImgEqualizer';
 
-const InnerMap = ({photos}) => {
+const InnerMap = ({ photos }) => {
     const map = useMap();
     const [usedPhotos, setUsedPhotos] = useState([]);
     const navigator = useNavigate();
-  
+    const { addAlert } = useGlobalContext();
+    const [currentPos, setCurrentPos] = useState(null);
+    const setCurrentPosition = () => {
+        window.navigator.geolocation.getCurrentPosition((position) => {
+            setCurrentPos([position.coords.latitude, position.coords.longitude]);
+            map.setView([position.coords.latitude, position.coords.longitude], 13);
+        }, (error) => {
+            console.log(error);
+            addAlert(
+                {
+                    title: 'No Geolocation',
+                    text: 'Please enable geolocation to use this feature.',
+
+                }
+            )
+            setCurrentPos(null);
+        }
+        )
+    }
     useEffect(() => {
         if (photos?.length > 0) {
             const photosWithGPS = photos.filter(t => t.gps?.GPSLatitude && t.gps?.GPSLongitude);
@@ -40,9 +60,36 @@ const InnerMap = ({photos}) => {
             <TileLayer
                 url="https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
             />
-
+            <button style={{
+                position: 'absolute',
+                bottom: '10px',
+                left: '10px',
+                zIndex: 1000,
+                border: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                backgroundColor: '#33333360',
+            }} onClick={() => {
+                setCurrentPosition();
+            }}><span className='bi-crosshair'
+                style={{ fontSize: '1.5em', color: 'white' }}
+            ></span></button>
             {
-                usedPhotos?.length>0 && usedPhotos.map((photo, index) => {
+                currentPos &&
+                <Marker position={[currentPos[0], currentPos[1]]}>
+                    <Popup>
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}
+                        >
+                            <span className='bi bi-pin'/>My location
+                        </div>
+                    </Popup>
+                </Marker>
+            }
+            {
+                usedPhotos?.length > 0 && usedPhotos.map((photo, index) => {
                     return (
                         <Marker key={index} position={[photo.gps.GPSLatitude + 0.01 * Math.sin(index), photo.gps.GPSLongitude + 0.01 * Math.cos(index)]}
                             icon={L.icon({
@@ -55,11 +102,8 @@ const InnerMap = ({photos}) => {
                             <Popup>
                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
                                     onClick={() => { navigator('/result/' + photo.id); }}
-                                >   <div className={styles.imgContainerBg}>
-                                        <div className={styles.imgContainer}>
-                                            <img src={photo.image}  ></img>
-                                        </div>
-                                    </div>
+                                >
+                                    <ImgEqualizer src={photo.image} alt={"photo:" + photo.id} />
                                     {/* <div>{photo.id}</div> */}
                                     <div><span style={{ color: '#aaa', fontWeight: 'bold' }}> Species:</span>
                                         {photo.species}</div>

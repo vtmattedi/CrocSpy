@@ -6,6 +6,25 @@
             "src": "/croc3.svg"
         }
     ],
+    "description": "Croc Spy App, the best app for spying on crocodiles.",
+    "shortcuts": [
+        {
+            "name": "Croc Spy",
+            "url": "/"
+        },
+        {
+            "name": "Identify Croc",
+            "url": "/Identify"
+        },
+        {
+            "name": "Croc Map",
+            "url": "/Map"
+        },
+        {
+            "name": "Croc Camera",
+            "url": "/Camera"
+        }
+    ],
     "start_url": ".",
     "theme_color": "#333",
     "background_color": "#333",

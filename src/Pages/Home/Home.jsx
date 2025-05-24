@@ -98,8 +98,7 @@ Found in tropical and subtropical regions around the world, including Africa, As
                                             </Button>
                                         </div>
                                         <div className={styles.divider}>
-                                            <img src={croclock} alt='Crocodile' bgColor='00000000' className={styles.img} />
-                                            <img src={croclock2} alt='Crocodile'  bgColor='00000000' className={styles.imgbg} />
+                                            <img src={croclock} alt='Crocodile'  className={styles.img} />
                                         </div>
                                     </div> :
                                     <>

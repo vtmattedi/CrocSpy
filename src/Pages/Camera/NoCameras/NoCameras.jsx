@@ -16,7 +16,7 @@ const NoCamera = () => {
                     <li>Try refreshing the page or restarting your browser.</li>
                     <li>If you are using a mobile device, make sure the camera is not being used by another app.</li>
                     <li>Check if your browser supports camera access.</li>
-                    <li>Try using a different browser to see if the issue persists.</li>
+                    <li>Web RTC only works on secure contexts, make sure you are connected via https.</li>
                 </ul>
             </div>
             <h5>Still having issues?</h5>

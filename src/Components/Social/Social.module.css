@@ -1,0 +1,15 @@
+.icon{
+   
+}
+
+.icon:hover {
+    color: var(--accent-color-alt)!important;
+    transition: 0.3s;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    margin: 0 1vw;
+}

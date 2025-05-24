@@ -20,14 +20,14 @@ const AdminPanel = ({ show, setShow, setShowParent }) => {
     ];
     const getDatediff = () => {
         const date1 = new Date(Version.buildDate);
-        const date2 = new Date(); // convert date2 to gmt 0 (assume -3 gmt)
-        const diffTime = (date2 - date1) + 3 * 60 * 60 * 1000;  // 3 hours in milliseconds 
+        const date2 = new Date(new Date().toUTCString()); // convert date2 to gmt 0 (assume -3 gmt)
+        const diffTime = (date2 - date1);
         //console.log('diffTime', diffTime);
         const diffMinutes = Math.floor(diffTime / (1000 * 60 * 60));
-        return `Built: ${diffMinutes} Hours ago`;
+        return `${diffMinutes} Hours ago`;
     }
     return (
-        <Offcanvas show={show} onHide={() => setShow(false)} placement='end' data-bs-theme='dark' style={{ maxWidth: '80%' }}>
+        <Offcanvas show={show} onHide={() => setShow(false)} placement='end' data-bs-theme={theme} style={{ maxWidth: '80%' }} >
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title><span className='bi bi-gear-fill' style={{ marginRight: '10px' }} />Admin Panel</Offcanvas.Title>
             </Offcanvas.Header>
@@ -81,10 +81,11 @@ const AdminPanel = ({ show, setShow, setShowParent }) => {
                     </Button>
                 </div>
                 <div className='d-flex flex-column align-items-center mt-3'>
+                    <span>Build date: </span>
                     <span style={{ fontSize: '1.2em' }}>{Version.buildDate}</span>
                 </div>
-                <div className='d-flex flex-column align-items-center mt-3'>
-                    <span style={{ fontSize: '1.2em' }}>{getDatediff()}</span>
+                <div className='d-flex flex-column align-items-center mt-1'>
+                    <span style={{ fontSize: '1em' }}>{getDatediff()}</span>
                 </div>
 
             </Offcanvas.Body>

@@ -11,6 +11,7 @@ import AdminPanel from '../AdminPanel/AdminPanel';
 import { useGlobalContext } from '../../Contexts/GlobalContext';
 import Version from '../../version';
 import { TOS_VERSION } from '../../assets/tos';
+import Social from '../Social/Social';
 const MobileFooter = () => {
     const { theme, toggleTheme } = useTheme();
     const { width, mobile } = usePageWidth();
@@ -88,7 +89,10 @@ const MobileFooter = () => {
                                 <span>Version: {Version.version}</span>
                                 <i>MattediWorks© 2025</i>
                                 <a>Terms and Conditions: {TOS_VERSION}</a>
-
+                                <Social
+                                    size='2em'
+                                    color={theme === 'dark' ? 'white' : 'black'}
+                                />
                             </div>
                         </Offcanvas.Body>
 

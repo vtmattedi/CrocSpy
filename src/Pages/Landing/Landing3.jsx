@@ -91,7 +91,7 @@ const Landing3 = () => {
                                 disabled={!toggle}
                                 className={styles.acceptButton}
                                 id={'startbtn'}
-                            ><div className={styles.startbtn}>Começar <div id={'start'} className='bi bi-arrow-right'></div></div></Button>
+                            ><div className={styles.startbtn}>Start <div id={'start'} className='bi bi-arrow-right'></div></div></Button>
                         </div>
                     </div>
                 </div>
@@ -123,6 +123,10 @@ const Landing3 = () => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button
+                        style={{
+                            color: theme === 'dark' ? 'white' : 'black',
+
+                        }}
                         onClick={() => {
                             let txt = "Terms and Conditions For Croc Eye Usage\n\n";
                             txt += "version: " + TOS_VERSION + "\n";

@@ -1,3 +1,4 @@
+import { add } from 'dexie';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -6,7 +7,7 @@ const ThemeContext = createContext(undefined);
 
 export const ThemeProvider = ({ children }) => {
     const [theme, _setTheme] = useState('light');
-    const [locale, _setLocale] = useState('pt-br');
+    const [locale, _setLocale] = useState('en-us');
     const { i18n } = useTranslation();
 
     // Toggle between light and dark theme
@@ -39,8 +40,14 @@ export const ThemeProvider = ({ children }) => {
     // Load theme and locale from local storage
     const loadState = () => {
         const localTheme = localStorage.getItem('theme');
+        console.log("localTheme: ", localTheme);
         if (localTheme) {
             _setTheme(localTheme);
+        }
+        else {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                _setTheme('dark');
+            }
         }
         const localLocale = localStorage.getItem('locale');
         if (localLocale) {

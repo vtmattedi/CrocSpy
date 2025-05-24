@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import usePageWidth from '../../Hooks/PageWidth';
 import { useGlobalContext } from '../../Contexts/GlobalContext';
 import AdminPanel from '../AdminPanel/AdminPanel';
+import Social from '../Social/Social';
 const Header = () => {
     const { slots } = useGlobalContext();
     const { mobile } = usePageWidth();
@@ -33,33 +34,37 @@ const Header = () => {
         <>
             {
                 !mobile ?
-                <div className={styles.blockdiv}>
-                    <div className={styles.outerdiv}>
-                        <div className={styles.navdiv}>
-                            <Navbar className={styles.navbar}>
-                                {
-                                    slots.filter(t => t.text !== "Settings").map((page, index) => {
-                                        return (
-                                            <Nav.Link key={index} onClick={() => { handleClick(page.text) }}> <div className={
-                                                styles.itemDiv + (window.location.pathname === '/' + page.text ? ' ' + styles.active : '')}
-                                            ><span className={page.icon} />{page.text} </div></Nav.Link>)
-                                    })
-                                }
+                    <div className={styles.blockdiv}>
+                        <div className={styles.outerdiv}>
+                            <div className={styles.navdiv}>
+                                <Navbar className={styles.navbar}>
+                                    {
+                                        slots.filter(t => t.text !== "Settings").map((page, index) => {
+                                            return (
+                                                <Nav.Link key={index} onClick={() => { handleClick(page.text) }}> <div className={
+                                                    styles.itemDiv + (window.location.pathname === '/' + page.text ? ' ' + styles.active : '')}
+                                                ><span className={page.icon} />{page.text} </div></Nav.Link>)
+                                        })
+                                    }
 
-                            </Navbar>
+                                </Navbar>
+                            </div>
+
+                            <div className={styles.settings}>
+                                <Social
+                                    size='1.2em'
+                                />
+                                <span onClick={() => setShowAdmin(true)} className={'bi bi-toggles ' + styles.adminSpan}></span>
+                                <LanguageSelector fontSize='1.25em' />
+                                <ThemeButton className={styles.themeBtn} borderwidth={'0'} />
+                            </div>
                         </div>
-                        <div className={styles.settings}>
-                            <span onClick={() => setShowAdmin(true)} className={'bi bi-toggles ' + styles.adminSpan}></span>
-                            <LanguageSelector fontSize='1.25em' />
-                            <ThemeButton className={styles.themeBtn} borderwidth={'0'} />
-                        </div>
-                    </div>
-                    <AdminPanel
-                        show={showAdmin}
-                        setShow={setShowAdmin}
-                        setShowParent={() => { }}
-                    />
-                </div> : <></>
+                        <AdminPanel
+                            show={showAdmin}
+                            setShow={setShowAdmin}
+                            setShowParent={() => { }}
+                        />
+                    </div> : <></>
                 // <div style={{
                 //     width: '100%', height: '0.5em',
                 //     backgroundColor: 'argb(255, 255, 255, 0)',
