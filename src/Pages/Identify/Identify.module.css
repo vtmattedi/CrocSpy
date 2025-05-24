@@ -1,0 +1,160 @@
+.buttons {
+    display: flex;
+    gap: 10px;
+    font-size: 1.5em;
+}
+
+
+
+.actionButtons {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+.gpsDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.coordOffcanvas {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    max-width: 95%;
+    margin: 0 auto;
+    border-radius: 20px;
+    min-height: 40%;
+    margin-top: 10vh;
+}
+
+.inputButtons {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+
+}
+
+.inputsOuterDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.inputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+
+}
+
+.inputContainer label {
+    font-size: 1.2em;
+    text-align: right;
+}
+
+.gpsButtonsContainer {
+    font-size: 1.5em;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px;
+
+}
+
+.gpsButtons {
+    color: var(--accent-color);
+    border-radius: 0px;
+    border: 1px solid var(--accent-color);
+}
+
+.gpsInfoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5em;
+    margin: 10px;
+}
+
+.gpsDropdownToggle {
+    background-color: rgba(240, 248, 255, 0);
+    border: 0px;
+}
+
+.gpsDropdownToggle :active {
+    background-color: rgba(240, 248, 255, 0) !important;
+}
+
+.gpsButtonsInner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.clearGpsBtn:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.gpsSpinner {
+    height: 1em;
+    width: 1em;
+    color: var(--accent-color);
+    font-size: 1em;
+}
+
+.croclock {
+    position: fixed;
+    width: 50%;
+    height: auto;
+    bottom: 4em;
+    left: 0;
+    z-index: 0;
+
+
+}
+
+@media screen and (min-width: 768px) {
+    .croclock {
+        width: auto;
+        height: 50%;
+        left: 40%;
+    }
+
+}
+
+
+.croclocks {
+    -webkit-transform: scale(-1, 1);
+    -moz-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+
+}
+
+@keyframes swing {
+    90% {
+        transform: rotate(0deg);
+
+    }
+
+    100% {
+        transform: rotate(15deg);
+
+    }
+
+}

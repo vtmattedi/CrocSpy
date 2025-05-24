@@ -1,0 +1,10 @@
+:root {
+    --background-color: #333;
+    --text-color: #fff;
+    --accent-color: #00ff00c3;
+    --accent-color-alt: #e9ba438f;
+    --box-shadow-color: #222;
+    --title-font: 'Inter';
+    --title-size: 2em;
+}
+

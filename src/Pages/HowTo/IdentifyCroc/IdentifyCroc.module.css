@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    align-items: top;
+    justify-content: center;
+    margin: 4vh;
+}
+.textContainer {
+    width: 50%;
+    text-indent: 10px;
+}
+.textContainer p {
+    text-align: justify;
+}
+.textContainer ul li {
+    text-align: left;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .textContainer {
+        width: 80%;
+    }
+
+}

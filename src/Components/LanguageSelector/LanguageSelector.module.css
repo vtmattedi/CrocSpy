@@ -1,0 +1,38 @@
+
+.languageButton{
+    border: 0px solid white;
+    text-align: center;
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.languageButtonLight{
+    color: black !important;
+    border: 0px solid black;
+    text-align: center;
+    text-decoration: none;
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.languageButtonLight div:hover{
+    background-color: rgba(255, 0, 0, 0.975) !important;
+}
+
+
+.languageButton img{
+    font-size: 1.5em;
+}
+
+.languageItem{
+    display: flex;
+    flex-direction: row;
+    font-size: 1em;
+
+}
+.languageItem p{
+    margin: auto;
+}
+
+.languageItem img{
+    font-size: 1.5em;
+ }

@@ -1,0 +1,88 @@
+.bar {
+    position: fixed;
+    bottom: 0 !important;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    z-index: 10000;
+    left: 0;
+    right: 0;
+    margin-bottom: 0;
+}
+
+.slot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    border: 1px solid #000;
+    background-color: #333;
+    height: 4em;
+
+
+}
+
+.slot:hover {
+    background-color: #f0f0f0;
+    color: black;
+    cursor: pointer;
+}
+
+.icon {
+    font-size: 1.5em;
+}
+
+.setting {
+    display: flex;
+    padding: 10px;
+    gap: 10px;
+    align-content: center;
+}
+.themeButton{
+      font-size: 1.5em;
+      background-color: rgba(0, 0, 0, 0) !important;
+}
+
+.setting span {
+    min-width: 5em;
+    font-size: 1.25em;
+    text-align: center;
+    align-self: center;
+}
+
+
+.offcanvasfooter {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    text-align: center;
+}
+
+.offcanvasfooter span, i {
+    align-self: flex-end;
+}
+
+.offcanvasfooter a:hover {
+    color: #2200ff !important;
+    text-decoration: underline !important;
+    cursor: pointer;
+}
+
+.adminButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 3em;
+    padding: 0;
+    background-color: #33333305;
+    border: 1px solid var(--accent-color-alt);
+    padding: 10px;
+}
+.adminButton div {
+    font-size: 1.25em;
+}

@@ -1,0 +1,185 @@
+@keyframes logo-scale {
+  from {
+    background-size: 100%;
+    background-position: 00%;
+  }
+
+  33% {
+    background-size: 150%;
+    background-position: 0%;
+  }
+
+  66% {
+    background-size: 150%;
+    background-position: 100%;
+  }
+
+  to {
+    background-size: 150%;
+    background-position: 50%;
+  }
+}
+
+.logoDiv {
+  /* width: 80%;
+  height: 80vh;
+  border-radius: 10%;
+  overflow: hidden;
+  margin: auto; */
+  height: 100vh;
+  background-position: 0dvh;
+  background-size: cover;
+}
+
+
+.outerdiv {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  scrollbar-width: none;
+  position: absolute;
+  padding: 5px;
+  width: 100%;
+  bottom: 0;
+  justify-content: space-between;
+  max-height: 10vh;
+
+}
+
+.tos:hover {
+  color: #f0f0f0;
+  cursor: pointer;
+
+}
+
+.tosText {
+  text-indent: 1vw;
+  text-align: justify;
+  margin: 0 5px;
+  max-height: 60vh;
+  text-wrap: normal;
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin:auto;
+  height: 100%;
+}
+
+.contentDiv{
+  background-color: #333333bd;
+  border-radius: 20px;
+  padding: 1em;
+}
+
+.switch {
+  font-size: 2em;
+}
+
+.startbtn {
+  display: flex;
+  gap: 10px;
+}
+
+.startbtn:hover {
+  cursor: pointer;
+
+}
+
+.anim {
+  animation: swipe 1s ease-out 0s;
+}
+.anim2{
+  animation: collapse2 2s ease-in 0s ;
+  overflow: hidden;
+}
+
+@keyframes collapse2 {
+  0% {
+    transform: rotate3d(0, 1, 0, 0deg);
+  }
+  100% {
+    transform: rotate3d(0, 1, 0, 90deg);
+  }
+
+}
+
+@keyframes swipe {
+  0% {
+    transform: translateX(-500%);
+  }
+  
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.tosDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 5px 0;
+}
+
+.downbtn{
+  background-color: #33333300;
+}
+
+.opts
+{
+  display: flex;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1vw;
+  height: 2em;
+}
+.opts span{
+  font-size: 1.2em;
+}
+.opts span:hover {
+  font-size: 1.5em;
+  cursor: pointer;
+  color: var(--accent-color-alt);
+}
+
+.outText {
+  font-size: 1.5em;
+  color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.inText{
+   font-size: 1.4em;
+  font-family: "JetBrains Mono", monospace;
+  color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+.eye{
+  color: green;
+}
+
+.eye svg{
+ color: green !important;
+}
+
+.buttonContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}

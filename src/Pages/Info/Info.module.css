@@ -1,0 +1,67 @@
+@import '../../colors.css';
+
+.navDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  max-width: min(100vw - 20px, 1000px);
+  margin: auto;
+}
+
+.navDiv a:hover {
+  cursor: pointer;
+  color: var(--accent-color);
+  transition: all 0.3s ease-in-out;
+  text-decoration: underline;
+}
+
+.section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: top;
+  padding: 10px;
+  max-width: calc(100vw - 20px);
+  gap: 10px;
+  margin-top: 1em;
+}
+
+.mobilesection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  margin: auto;
+  max-width: calc(100vw - 10px);
+  gap: 10px;
+  margin-top: 1em;
+}
+
+.crocEyeImg {
+  width: 20em;
+  height: 20em;
+
+}
+
+.sectionText {
+  text-align: justify;
+  text-indent: 2em
+}
+
+.sectionText h2 {
+  text-align: center;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+}
+
+.outerDiv {
+  justify-content: center;
+  width: 100%;
+}

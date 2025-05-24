@@ -1,0 +1,127 @@
+
+
+.outerdiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 98vw;
+    margin-top: 1px;
+    max-width: 98vw;
+}
+
+.blockdiv::after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 0.5px;
+    border-radius: 2px;
+    background-color: var(--accent-color-alt);
+}
+
+.navdiv{
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+}
+.navbar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.navbar a:hover{
+    color: var(--accent-color-alt);
+    border-radius: 0.5rem;
+
+}
+.navbar a::after{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    
+}
+.navbar a:hover::after{
+
+    
+    background: var(--accent-color);
+    transition: all 0.3s ease-in-out;
+    animation: bar .5s ease-in-out;
+    
+}
+
+.active{
+    color: var(--accent-color);
+    font: bolder;
+    border-radius: 0.5rem;
+}
+
+@keyframes bar {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+    
+}
+
+.collapseDiv{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 100%;
+    height: 100%;
+    gap: 1rem;
+}
+
+.menu{
+    font-size: 2em;
+}
+
+.navbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    gap: 2rem;
+
+}
+.navbar span{
+    color: var(--color-primary-alt);
+    font: bolder;
+}
+
+.settings{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.themeBtn{
+    font-size: 1em;
+    background-color: rgba(0, 0, 0, 0) !important;
+}
+.itemDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.25em;
+}
+
+.adminSpan:hover{
+    color: var(--accent-color-alt);
+    border-radius: 0.5rem;
+    cursor: pointer;
+}

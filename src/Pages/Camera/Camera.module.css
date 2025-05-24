@@ -1,0 +1,62 @@
+.cameraDiv {
+    justify-content: center;
+    display: flex;
+    background-color: black;
+    width: 100%;
+    flex-direction: column;
+    height: calc(100vh - 4em);
+}
+
+.camera {
+    display: flex;
+    max-width: 100%;
+}
+
+.cameraButtons {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    z-index: 99;
+    bottom: 5em;
+    width: 100%;
+
+}
+
+.outerDiv {
+    display: flex;
+    overflow-y: hidden;
+
+}
+
+.auxBtns {
+    border: solid 1px white;
+    height: 3em;
+    width: 3em;
+    border-radius: 50%;
+    background-color: #0000006c;
+    padding: 5px;
+    color: white;
+}
+
+.cameraBtn{
+    font-size: 3em;
+    color: white;
+    border: solid 1px white;
+    background-color: #0000006c;
+    border-radius: 5px;
+}
+
+.loadingDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    gap: 10px;
+}
+
+.loadingDiv span{
+    font-size: 1.2em;
+}

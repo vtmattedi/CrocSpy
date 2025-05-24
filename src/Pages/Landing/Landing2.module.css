@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+@keyframes logo-scale {
+    from {
+        background-size: 100%;
+        background-position: 00%;
+    }
+
+    33% {
+        background-size: 150%;
+        background-position: 0%;
+    }
+
+    66% {
+        background-size: 150%;
+        background-position: 100%;
+    }
+
+    to {
+        background-size: 150%;
+        background-position: 50%;
+    }
+}
+
+.logoDiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 5vh;
+}
+
+.title{
+    font-family: "Lato", sans-serif;
+    font-size: 2.5em;
+    color: #f0f0f0;
+    text-shadow: 0px 5px 10px rgb(93, 93, 93);
+   
+}
+
+.subtext{
+    font-family:  "JetBrains Mono", monospace;
+    font-size: 1.5em;
+    padding: 2vh;
+    margin : 5vh 0;
+}
+
+.outerdiv {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    scrollbar-width: none;
+    position: absolute;
+    padding: 5px;
+    width: 100%;
+    bottom: 0;
+    justify-content: space-between;
+    max-height: 10vh;
+
+}
+
+.tos:hover {
+    color: #f0f0f0;
+    cursor: pointer;
+
+}
+
+.tosText {
+    text-indent: 1vw;
+    text-align: justify;
+    margin: 0 5px;
+    max-height: 60vh;
+    text-wrap: normal;
+}
+
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: auto;
+    height: 100%;
+}
+
+.contentDiv {
+    background-color: #333333bd;
+    border-radius: 20px;
+    padding: 1em;
+}
+
+.switch {
+    font-size: 2em;
+}
+
+.startbtn {
+    display: flex;
+    gap: 10px;
+}
+
+.startbtn:hover {
+    cursor: pointer;
+
+}
+
+.anim {
+    animation: swipe 1s ease-out 0s;
+}
+
+.anim2 {
+    animation: collapse2 2s ease-in 0s;
+    overflow: hidden;
+}
+
+@keyframes collapse2 {
+    0% {
+        transform: rotate3d(0, 1, 0, 0deg);
+    }
+
+    100% {
+        transform: rotate3d(0, 1, 0, 90deg);
+    }
+
+}
+
+@keyframes swipe {
+    0% {
+        transform: translateX(-500%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.tosDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+}
+
+.downbtn {
+    background-color: #33333300;
+}
+
+.opts {
+    display: flex;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1vw;
+    height: 2em;
+}

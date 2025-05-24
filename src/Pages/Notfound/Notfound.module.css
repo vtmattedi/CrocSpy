@@ -1,0 +1,45 @@
+@import '../../colors.css';
+
+.button {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.notfound {
+    display: 'flex';
+    flex-direction: 'column';
+    justify-content: 'center';
+    align-items: 'center';
+    height: '100vh';
+    color:  var(--accent-color);
+}
+.textDiv{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    @media (max-width: 600px) {
+        flex-direction: column;
+        align-items: center;
+        
+    }
+}
+
+.textDiv h5{
+    font-size: 1.5em;
+}
+
+.croc{
+    margin: 5px;
+    animation: run 2s ease-in-out infinite alternate;
+    width: 2em;
+}
+
+@keyframes run {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(50%);
+    }
+    
+}

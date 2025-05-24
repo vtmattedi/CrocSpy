@@ -1,0 +1,23 @@
+.mapContainer {
+    border: 1px solid #000;
+    margin: auto;
+    height: 60vh;
+    width: 99%;
+}
+
+.table {
+    width: 50vw;
+    margin: 1vh auto;
+}
+
+@media screen and (max-width: 768px) {
+    .mapContainer {
+        height: 50vh;
+    }
+
+    .table {
+        width: 80vw;
+        margin: 1vh auto;
+    }
+
+}

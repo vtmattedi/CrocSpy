@@ -1,0 +1,29 @@
+.imgContainerBg {
+    background: #00000057;
+    display: table;
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.imgContainer {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    margin: auto;
+    max-height: 100%;
+    max-width: 100%;
+    align-content: center;
+
+}
+
+.imgContainer img {
+    display: block;
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto;
+}
+
+.imgContainer {
+    height: 75px;
+}

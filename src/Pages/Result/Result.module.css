@@ -1,0 +1,123 @@
+.image {
+    width: auto;
+    height: 45vh;
+
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--box-shadow-color);
+}
+
+
+
+.image:hover {
+    box-shadow: 0 0 20px var(--box-shadow-color);
+}
+
+.skeleton {
+    min-height: 50vw;
+    min-width: 50vh;
+    border: 1px solid var(--accent-color);
+    border-radius: 10px;
+    background-color: var(--background-color);
+}
+
+.placeholderContainer {
+    width: 80%;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+    margin: auto;
+    margin-top: 5vh;
+
+}
+
+.placeholderContainerInner {
+    display: block;
+    width: 100%;
+}
+
+.placeholderPb {
+    display: block;
+}
+
+.placeholderBars {
+    display: block;
+    width: 100%;
+    margin: auto;
+    margin-top: 1vh;
+}
+
+.placeholderBars span {
+    height: 10vh;
+    width: 100%;
+    border-radius: 10px;
+    margin: 10px auto;
+}
+
+.resultInfo {
+    text-align: center;
+    text-indent: 1rem;
+    width: 80%;
+    margin: auto;
+    margin-top: 5vh;
+}
+
+.title {
+    font-size: 2em;
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.anotherButton {
+    font-size: 1.2em;
+    border-radius: 0px;
+}
+
+.insideButtonIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.insideButtonIcon:hover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.buttonsDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+    flex-wrap: wrap;
+}
+
+.buttonsInnerDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    flex-wrap: wrap;
+}
+
+.notUploadedContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1vh;
+    flex-wrap: wrap;
+}
+
+.notUploadedContainer p {
+    font-size: 1.1em;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
