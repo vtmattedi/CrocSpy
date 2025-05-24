@@ -1,0 +1,30 @@
+## Croc Spy App
+
+
+The Croc Spy project aims to build an AI to help identify and cataloge crocodilian species sent by the public. The project was idelized by a biology professor at UFBa and it is currently been developed.
+
+This app is an PWA that will connect the users with the AI.
+
+Main Packages Used:
+
+* leaflet for the map
+* React-camera-pro for the webRTC interactions
+* i18n for the translations (setup but now yet implmented all the texts)
+* dexie (indexedDB) for the local storage.
+* react-bootstrap for general components
+
+The project is still in development so there still are some development artefacts such as the admin panel
+which makes testing easier.
+In the spirit of the project, most text are AI generated and thus should not be taken as absolut truths. The final version will contain information text that will be approved by the professor.
+
+The AI team have not yet finished the backend and thus, for now, we are faking the upload and randomly assigning an species to a photo.
+
+Some dev points:
+
+* Yes, the theme on the language selector is purposely inverted.
+* The Map is centered at the average coordinates of the photos with gps data.
+
+* The count includes photos without gps data.
+
+
+Try it out live: [crocspy.vercel.app](crocspy.vercel.app)

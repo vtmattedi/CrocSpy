@@ -55,11 +55,43 @@ Found in tropical and subtropical regions around the world, including Africa, As
     }
     const { deletePhoto } = useGlobalContext();
     const hasGps = (photo) => {
-        console.log(photo, photo.id, photo.gps?.GPSLatitude && photo.gps?.GPSLongitude);
         if (photo.gps?.GPSLatitude && photo.gps?.GPSLongitude) {
             return true;
         }
         return false;
+    }
+    const getCertColor = (certainty) => {
+        if (certainty >= 0.9) {
+            return 'green';
+        }
+        else if (certainty >= 0.7) {
+            return 'yellow';
+        } else if (certainty >= 0.5) {
+            return 'orange';
+        } else {
+            return 'red';
+        }
+    }
+    const getFamily = (species) => {
+        const croc = species.toLowerCase().indexOf('crocodile');
+        const alligator = species.toLowerCase().indexOf('alligator');
+        const caiman = species.toLowerCase().indexOf('caiman');
+        const gharial = species.toLowerCase().indexOf('gharial');
+        if (croc !== -1) {
+            return 'Crocodylidae';
+        }
+        else if (alligator !== -1) {
+            return 'Alligatoridae';
+        }
+        else if (caiman !== -1) {
+            return 'Alligatoridae';
+        }
+        else if (gharial !== -1) {
+            return 'Gavialidae';
+        }
+        else {
+            return '---';
+        }
     }
     return (
         <>
@@ -98,7 +130,7 @@ Found in tropical and subtropical regions around the world, including Africa, As
                                             </Button>
                                         </div>
                                         <div className={styles.divider}>
-                                            <img src={croclock} alt='Crocodile'  className={styles.img} />
+                                            <img src={croclock} alt='Crocodile' className={styles.img} />
                                         </div>
                                     </div> :
                                     <>
@@ -117,15 +149,26 @@ Found in tropical and subtropical regions around the world, including Africa, As
                                                             key={index} >
 
                                                             <ImgEqualizer src={photo.image} alt={photo.name} width='100%' height='50vh' bgColor='00000000' />
+
+
                                                             <Carousel.Caption>
+                                                                <div
+                                                                    style={{
+                                                                        alignItems: 'center',
+                                                                        fontSize: '1.2em',
+                                                                        color: hasGps(photo) ? 'green' : 'red',
+                                                                    }}
+                                                                >
+                                                                    <span className='bi bi-geo'></span>
+                                                                </div>
 
                                                             </Carousel.Caption>
                                                         </Carousel.Item>
                                                     )
                                                 })
                                             }
+
                                         </Carousel>
-                                        <div></div>
                                         <div className={styles.carouselButtons}>
                                             <Button
                                                 variant='outline-danger'
@@ -189,13 +232,20 @@ Found in tropical and subtropical regions around the world, including Africa, As
                                         </div>
                                         <div>
                                             {photos[carouselIndex].status !== 'New' &&
-                                                <div>
-                                                    <p>
-                                                        Species: {photos[carouselIndex].species}
-                                                    </p>
-                                                    <p>
-                                                        Certainty: {(photos[carouselIndex].certainty * 100).toFixed(1)}%
-                                                    </p>
+                                                <div className={styles.resultContainer}>
+                                                    <div className={styles.results}>
+                                                        <span className={styles.resultTitle}>Species:</span>
+                                                        <span className={styles.resultVal}>{photos[carouselIndex].species}</span>
+                                                        <span className={styles.resultFamily}>({getFamily(photos[carouselIndex].species)})</span>
+                                                    </div>
+                                                    <div className={styles.results}>
+                                                        <span className={styles.resultTitle}>Certainty:</span>
+                                                        <span className={styles.resultVal}
+                                                            style={{
+                                                                color: getCertColor(photos[carouselIndex].certainty)
+                                                            }}
+                                                        >{(photos[carouselIndex].certainty * 100).toFixed(1)}%</span>
+                                                    </div>
                                                 </div>
                                             }
                                         </div>
@@ -217,4 +267,4 @@ Found in tropical and subtropical regions around the world, including Africa, As
     );
 };
 
-export default Home;
+export default Home;    
