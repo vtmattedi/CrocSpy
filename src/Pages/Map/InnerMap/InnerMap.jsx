@@ -8,7 +8,7 @@ import croclock from '../../../assets/croclockhomes.png';
 import { useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../../../Contexts/GlobalContext';
 import ImgEqualizer from '../../../Components/ImgEqualizer/ImgEqualizer';
-
+import mappin from '../../../assets/pin.svg';
 const InnerMap = ({ photos }) => {
     const map = useMap();
     const [usedPhotos, setUsedPhotos] = useState([]);
@@ -79,7 +79,14 @@ const InnerMap = ({ photos }) => {
             ></span></button>
             {
                 currentPos &&
-                <Marker position={[currentPos[0], currentPos[1]]}>
+                <Marker position={[currentPos[0], currentPos[1]]}
+                    icon={L.icon({
+                        iconUrl: mappin,
+                        iconSize: [40, 40], // size of the icon
+                        iconAnchor: [25, 50], // point of the icon which will correspond to marker's location
+                        popupAnchor: [0, -50] // point from which the popup should open relative to the iconAnchor
+                    })}
+                >
                     <Popup>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }}
                         >

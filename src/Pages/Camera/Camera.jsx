@@ -257,7 +257,7 @@ const CameraPage = () => {
                         marginTop: '1vh',
                         color: theme === 'light' ? 'black' : 'white'
                     }}>
-                    {"Deseja Utilizar esta foto?"}
+                    {"Photo Preview"}
                 </div>
                 </Modal.Title>
                 <Modal.Body
