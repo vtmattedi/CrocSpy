@@ -4,7 +4,7 @@ const TOS_VERSION = '1.5.0';
 const TOS_DATE = '2023-10-01';
 
 const getTos = (locale) => {
-    console.log('getTos', locale);
+    // console.log('getTos', locale);
 
     if (locale === 'en-us') {
         return {

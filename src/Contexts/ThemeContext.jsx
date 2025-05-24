@@ -40,7 +40,6 @@ export const ThemeProvider = ({ children }) => {
     // Load theme and locale from local storage
     const loadState = () => {
         const localTheme = localStorage.getItem('theme');
-        console.log("localTheme: ", localTheme);
         if (localTheme) {
             _setTheme(localTheme);
         }

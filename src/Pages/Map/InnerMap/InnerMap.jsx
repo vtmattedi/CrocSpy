@@ -43,7 +43,6 @@ const InnerMap = ({ photos }) => {
             const avg = photosWithGPS.reduce((acc, photo) => {
                 acc.GPSLatitude += photo.gps.GPSLatitude;
                 acc.GPSLongitude += photo.gps.GPSLongitude;
-                console.log(photo.gps.GPSLatitude, photo.gps.GPSLongitude);
                 return acc;
             }, { GPSLatitude: 0, GPSLongitude: 0 });
             avg.GPSLatitude /= photosWithGPS.length;

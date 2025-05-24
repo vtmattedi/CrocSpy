@@ -43,7 +43,6 @@ export const TosProvider = ({ children }) => {
         setTosaccepted({ accepted: true, version: version });
         saveTos({ accepted: true, version: version });
         console.log("TOS Accepted");
-        console.log(localStorage.getItem('tos'));
     }
     useEffect(() => {
 

@@ -90,7 +90,6 @@ const CameraPage = () => {
                     );
                 },
                 (error) => {
-                    console.log('Error getting location: ', error);
                     addAlert({
                         title: 'Error getting geo location',
                         text: 'We were unable to get your location. Please check your location settings. This photo will be saved without location data.',
@@ -189,7 +188,6 @@ const CameraPage = () => {
                                 <Button
                                     onClick={() => {
                                         setShowConfig(true);
-                                        console.log(aspectRatio)
                                     }}
                                 >
                                     <div className={'bi bi-gear'} /></Button>
@@ -279,7 +277,6 @@ const CameraPage = () => {
                             <Button onClick={() => {
                                 hidePreview();
                                 deletePhoto(photoId).then().catch((err) => {
-                                    console.log(err);
                                     addAlert({
                                         title: 'Error deleting photo',
                                         text: 'We were unable to delete the photo. Please try again later.',

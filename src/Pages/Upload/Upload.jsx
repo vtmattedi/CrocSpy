@@ -275,7 +275,8 @@ const Upload = () => {
                 }
             } else {
                 setState(5);
-                console.log('Photo not found');
+                console.log('Photo not found in database, id:', id);
+                navigate('/home');
                 // addAlert(
                 //     {
                 //         title: 'Error',
