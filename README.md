@@ -23,8 +23,8 @@ Some dev points:
 
 * Yes, the theme on the language selector is purposely inverted.
 * The Map is centered at the average coordinates of the photos with gps data.
-
 * The count includes photos without gps data.
-
+* The pins in the map are offset by a sinusoid and a cossinusoid from the original location. This is better visualizing multiple photos during testing.
+* If you use the app on a desktop, your device probably does not have  an integrated gps and thus the location is a rougher approximation than on mobile.
 
 Try it out live: [crocspy.vercel.app](crocspy.vercel.app)
