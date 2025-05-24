@@ -6,7 +6,9 @@ const Social = ({ size='1em', color = 'var(--text-color)' }) => {
         { icon: 'bi bi-github', url: 'https://github.com/vtmattedi' },
         { icon: 'bi bi-linkedin', url: 'https://www.linkedin.com/in/vitor-mattedi-dev/' },
     ]
+    const NoSocial  = process.env.REACT_APP_NO_SOCIAL === 'true';
     return (
+        NoSocial? <></>:
         <div className={styles.container}>
             {socalLinks.map((link, index) => (
                 <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" className='mx-1'>
