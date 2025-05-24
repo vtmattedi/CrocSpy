@@ -2,15 +2,16 @@
 
 The Croc Spy project aims to build an AI to help identify and cataloge crocodilian species sent by the public. The project was idelized by a biology professor at UFBa and it is currently been developed.
 
-This app is an PWA that will connect the users with the AI.
+This app is an PWA that will connect the users with the AI. It was built using React + Vite.
 
 Main Packages Used:
 
-* leaflet for the map
-* React-camera-pro for the webRTC interactions
-* i18n for the translations (setup but now yet implmented all the texts)
+* leaflet for the map.
+* React-camera-pro for the webRTC interactions.
+* i18n for the translations (setup but now yet implmented all the texts).
 * dexie (indexedDB) for the local storage.
-* react-bootstrap for general components
+* react-bootstrap for general components.
+* reac-router-dom for routing.
 
 The project is still in development so there still are some development artefacts such as the admin panel
 which makes testing easier.
