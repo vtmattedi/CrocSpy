@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Offcanvas } from 'react-bootstrap';
+import { Container, Offcanvas } from 'react-bootstrap';
 import styles from './mobileFooter.module.css';
 import { useTheme } from '../../Contexts/ThemeContext';
 import { Button } from 'react-bootstrap';
@@ -14,11 +14,13 @@ import { TOS_VERSION } from '../../assets/tos';
 import Social from '../Social/Social';
 import { Trans } from 'react-i18next';
 import Translated from '../../Translations/Translated';
+import { use } from 'react';
 const MobileFooter = () => {
     const { theme, toggleTheme } = useTheme();
     const { width, mobile } = usePageWidth();
     const [showAdmin, setShowAdmin] = useState(false);
     const navigator = useNavigate();
+    const [ios, setIos] = useState(false);
 
     const [showSettings, setShowSettings] = useState(false);
     const { slots } = useGlobalContext();
@@ -26,17 +28,26 @@ const MobileFooter = () => {
         navigator('/' + page);
     }
 
+    useEffect(() => {
+        const agent = window.navigator.userAgent;
+        if (agent.includes('iPhone') || agent.includes('iPod')) {
+            setIos(true);
+        } else {
+            setIos(false);
+        }
+    }, []);
+    useEffect(() => {
+        console.log('ios', ios);
+    }, [ios]);
+
     return (
 
         mobile ? (
             <>
-                <div style={{
-                    width: '100%', height: '4em',
-                    backgroundColor: 'argb(255, 255, 255, 0)',
-                }}></div>
-                <div className={styles.bar}>
+                <div className={`${styles.spaceReserve}  ${(ios? styles.iosSpaceReserve : "")}`}></div>
+                <div className={`${styles.bar}  ${(ios? styles.iosBar : "")}`}>
                     {slots.map((page, index) => (
-                        <div key={index} className={styles.slot}
+                        <div key={index} className={`${styles.slot}  ${(ios && index === 0 ? styles.slotIosLeft : "")} ${(ios && index === slots.length-1 ? styles.slotIosRight: "")}`}
                             onClick={() => {
                                 if (page.name === 'Settings') {
                                     setShowSettings(true);
@@ -56,11 +67,12 @@ const MobileFooter = () => {
                         </div>
                     ))
                     }
-                    <Offcanvas show={showSettings} onHide={() => setShowSettings(false)} placement='end' data-bs-theme={theme} style={{ maxWidth: '80%', 
+                    <Offcanvas show={showSettings} onHide={() => setShowSettings(false)} placement='end' data-bs-theme={theme} style={{
+                        maxWidth: '80%',
                         color: theme === 'dark' ? 'white' : 'black'
                     }}>
                         <Offcanvas.Header closeButton>
-                            <Offcanvas.Title><span className='bi bi-gear-fill' style={{ marginRight: '10px' }} /><Translated path='footer.title'/></Offcanvas.Title>
+                            <Offcanvas.Title><span className='bi bi-gear-fill' style={{ marginRight: '10px' }} /><Translated path='footer.title' /></Offcanvas.Title>
                         </Offcanvas.Header>
                         <hr></hr>
                         <Offcanvas.Body>
@@ -72,12 +84,12 @@ const MobileFooter = () => {
                             </div>
                             <div className={styles.setting}>
                                 <span>
-                                     <Translated path='basics.language' as='none' />:
+                                    <Translated path='basics.language' as='none' />:
                                 </span>
                                 <LanguageSelector theme={theme} />
                             </div>
                             <div className={styles.setting}>
-                                <Button data-bs-theme={theme}  onClick={() => {
+                                <Button data-bs-theme={theme} onClick={() => {
                                     setShowAdmin(true);
                                 }} className={styles.adminButton}> <div
                                     style={{
@@ -85,14 +97,14 @@ const MobileFooter = () => {
                                     }}
                                 >
                                         Admin Panel
-                                    </div><div className='bi bi-arrow-right'  style={{
+                                    </div><div className='bi bi-arrow-right' style={{
                                         color: theme === 'dark' ? 'white' : 'black',
                                     }}></div></Button>
                             </div>
                             <div className={styles.offcanvasfooter}>
-                                <span><Translated path='basics.version'/>: {Version.version}</span>
+                                <span><Translated path='basics.version' />: {Version.version}</span>
                                 <i>MattediWorks© 2025</i>
-                                <a><Translated path='basics.tos'/>: {TOS_VERSION}</a>
+                                <a><Translated path='basics.tos' />: {TOS_VERSION}</a>
                                 <Social
                                     size='2em'
                                     color={theme === 'dark' ? 'white' : 'black'}
