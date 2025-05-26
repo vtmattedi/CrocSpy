@@ -12,6 +12,8 @@ import usePageWidth from '../../Hooks/PageWidth';
 import { useGlobalContext } from '../../Contexts/GlobalContext';
 import AdminPanel from '../AdminPanel/AdminPanel';
 import Social from '../Social/Social';
+import { Trans } from 'react-i18next';
+import Translated from '../../Translations/Translated';
 const Header = () => {
     const { slots } = useGlobalContext();
     const { mobile } = usePageWidth();
@@ -39,11 +41,17 @@ const Header = () => {
                             <div className={styles.navdiv}>
                                 <Navbar className={styles.navbar}>
                                     {
-                                        slots.filter(t => t.text !== "Settings").map((page, index) => {
+                                        slots.filter(t => t.name !== "Settings").map((page, index) => {
                                             return (
-                                                <Nav.Link key={index} onClick={() => { handleClick(page.text) }}> <div className={
-                                                    styles.itemDiv + (window.location.pathname === '/' + page.text ? ' ' + styles.active : '')}
-                                                ><span className={page.icon} />{page.text} </div></Nav.Link>)
+                                                <Nav.Link key={index} onClick={() => { handleClick(page.name) }}>
+                                                    <div className={styles.itemDiv + (window.location.pathname === '/' + page.name ? ' ' + styles.active : '')}>
+                                                        {
+                                                            page.svg ? <img src={page.svg} className={styles.svg}></img> : <span className={page.icon} />
+                                                        }
+                                                        <Translated path={page.text} as='none' />
+
+                                                    </div>
+                                                </Nav.Link>)
                                         })
                                     }
 

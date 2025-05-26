@@ -12,6 +12,8 @@ import { useGlobalContext } from '../../Contexts/GlobalContext';
 import Version from '../../version';
 import { TOS_VERSION } from '../../assets/tos';
 import Social from '../Social/Social';
+import { Trans } from 'react-i18next';
+import Translated from '../../Translations/Translated';
 const MobileFooter = () => {
     const { theme, toggleTheme } = useTheme();
     const { width, mobile } = usePageWidth();
@@ -33,22 +35,24 @@ const MobileFooter = () => {
                     backgroundColor: 'argb(255, 255, 255, 0)',
                 }}></div>
                 <div className={styles.bar}>
-                    {slots.map((div, index) => (
+                    {slots.map((page, index) => (
                         <div key={index} className={styles.slot}
                             onClick={() => {
-                                if (div.text === 'Settings') {
+                                if (page.name === 'Settings') {
                                     setShowSettings(true);
                                     return;
                                 }
                                 else {
                                     setShowSettings(false);
-                                    handleClick(div.text);
+                                    handleClick(page.name);
                                 }
                             }}>
                             <div className={styles.icon}>
-                                <i className={div.icon}></i>
+                                <i className={page.icon}></i>
                             </div>
-                            <span className={styles.text}>{div.text}</span>
+                            <span className={styles.text}>
+                                <Translated path={page.text} as='none' />
+                            </span>
                         </div>
                     ))
                     }
@@ -56,19 +60,19 @@ const MobileFooter = () => {
                         color: theme === 'dark' ? 'white' : 'black'
                     }}>
                         <Offcanvas.Header closeButton>
-                            <Offcanvas.Title><span className='bi bi-gear-fill' style={{ marginRight: '10px' }} />Settings</Offcanvas.Title>
+                            <Offcanvas.Title><span className='bi bi-gear-fill' style={{ marginRight: '10px' }} /><Translated path='footer.title'/></Offcanvas.Title>
                         </Offcanvas.Header>
                         <hr></hr>
                         <Offcanvas.Body>
                             <div className={styles.setting}>
                                 <span>
-                                    Theme:
+                                    <Translated path='basics.theme' as='none' />:
                                 </span>
                                 <ThemeButton className={styles.themeButton} borderwidth={'0'} />
                             </div>
                             <div className={styles.setting}>
                                 <span>
-                                    Language:
+                                     <Translated path='basics.language' as='none' />:
                                 </span>
                                 <LanguageSelector theme={theme} />
                             </div>
@@ -86,9 +90,9 @@ const MobileFooter = () => {
                                     }}></div></Button>
                             </div>
                             <div className={styles.offcanvasfooter}>
-                                <span>Version: {Version.version}</span>
+                                <span><Translated path='basics.version'/>: {Version.version}</span>
                                 <i>MattediWorks© 2025</i>
-                                <a>Terms and Conditions: {TOS_VERSION}</a>
+                                <a><Translated path='basics.tos'/>: {TOS_VERSION}</a>
                                 <Social
                                     size='2em'
                                     color={theme === 'dark' ? 'white' : 'black'}

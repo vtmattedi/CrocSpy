@@ -1,13 +1,14 @@
 import { add } from 'dexie';
 import React, { createContext, useState, useContext, ReactNode, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import availableLanguages from '../Translations/availableLenguages';
 
 
 const ThemeContext = createContext(undefined);
 
 export const ThemeProvider = ({ children }) => {
     const [theme, _setTheme] = useState('light');
-    const [locale, _setLocale] = useState('en-us');
+    const [locale, _setLocale] = useState('en-US');
     const { i18n } = useTranslation();
 
     // Toggle between light and dark theme
@@ -50,7 +51,31 @@ export const ThemeProvider = ({ children }) => {
         }
         const localLocale = localStorage.getItem('locale');
         if (localLocale) {
-            _setLocale(localLocale);
+            const isValidLocale = availableLanguages.find(lang => lang.locale === localLocale);
+            // If the locale is not valid, remove it from local storage
+            if (!isValidLocale) {
+                localStorage.removeItem('locale');
+                loadState();
+                return;       
+            }
+            // If the locale is valid, set it
+            if (process.env.REACT_APP_USE_TRANSLATION === 'true') {
+                _setLocale(localLocale);
+                i18n.changeLanguage(localLocale);
+            }
+            else {
+                 i18n.changeLanguage('en-US');
+            }
+        }
+        else {
+            if (process.env.REACT_APP_USE_TRANSLATION === 'true') {
+                // If translations are enabled, set the locale to the browser's default language
+                _setLocale(i18n.language);
+            }
+            else {
+                // If translations are not enabled, set the locale to 'en-US'
+                _setLocale('en-US');
+            }
         }
 
     }

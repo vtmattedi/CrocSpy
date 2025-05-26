@@ -1,6 +1,4 @@
-
-
-.outerdiv{
+.outerdiv {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,7 +7,7 @@
     max-width: 98vw;
 }
 
-.blockdiv::after{
+.blockdiv::after {
     content: '';
     display: block;
     width: 100%;
@@ -18,13 +16,14 @@
     background-color: var(--accent-color-alt);
 }
 
-.navdiv{
+.navdiv {
     display: flex;
     position: absolute;
     align-items: center;
     margin: 0 auto;
 }
-.navbar{
+
+.navbar {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -32,29 +31,31 @@
     width: 100%;
 }
 
-.navbar a:hover{
+.navbar a:hover {
     color: var(--accent-color-alt);
     border-radius: 0.5rem;
 
 }
-.navbar a::after{
+
+.navbar a::after {
     content: '';
     display: block;
     width: 100%;
     height: 2px;
     border-radius: 2px;
-    
-}
-.navbar a:hover::after{
 
-    
+}
+
+.navbar a:hover::after {
+
+
     background: var(--accent-color);
     transition: all 0.3s ease-in-out;
     animation: bar .5s ease-in-out;
-    
+
 }
 
-.active{
+.active {
     color: var(--accent-color);
     font: bolder;
     border-radius: 0.5rem;
@@ -64,13 +65,14 @@
     0% {
         width: 0;
     }
+
     100% {
         width: 100%;
     }
-    
+
 }
 
-.collapseDiv{
+.collapseDiv {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -82,11 +84,11 @@
     gap: 1rem;
 }
 
-.menu{
+.menu {
     font-size: 2em;
 }
 
-.navbar{
+.navbar {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,12 +98,13 @@
     gap: 2rem;
 
 }
-.navbar span{
+
+.navbar span {
     color: var(--color-primary-alt);
     font: bolder;
 }
 
-.settings{
+.settings {
     display: flex;
     width: 100%;
     justify-content: flex-end;
@@ -110,17 +113,18 @@
 }
 
 @media screen and (max-width: 900px) {
-    .navdiv{
+    .navdiv {
         width: auto;
-        left: 10vw;
+        left: 2vw;
     }
 }
 
-.themeBtn{
+.themeBtn {
     font-size: 1em;
     background-color: rgba(0, 0, 0, 0) !important;
 }
-.itemDiv{
+
+.itemDiv {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,8 +132,13 @@
     font-size: 1.25em;
 }
 
-.adminSpan:hover{
+.adminSpan:hover {
     color: var(--accent-color-alt);
     border-radius: 0.5rem;
     cursor: pointer;
+}
+
+.svg {
+    height: 1.25em;
+    filter: invert(1);
 }

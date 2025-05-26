@@ -3,16 +3,23 @@ import { Modal } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { useTheme } from './ThemeContext';
 import { db } from '../../db';
+import exploreSVG from '../assets/binoculars.svg';
+import { Trans } from 'react-i18next';
+import Translated from '../Translations/Translated';
 const GlobalContext = createContext(undefined);
 
 const defaultSlots = [
-    { icon: 'bi bi-house', text: 'Home' },
-    { icon: 'bi bi-pin-map', text: 'Map' },
+    { icon: 'bi bi-house', name: 'Home', text: 'navigation.home' },
+    { icon: 'bi bi-pin-map', name: 'Map', text: 'navigation.map' },
     // { icon: 'bi bi-camera2', text: 'Camera' },
-    { icon: 'bi bi-search', text: 'Identify' },
-    { icon: 'bi bi-info-circle', text: 'Info' },
-    { icon: 'bi bi-gear', text: 'Settings' },
+    { icon: 'bi bi-search', name: 'Identify', text: 'navigation.identify' },
+    { icon: 'bi bi-info-circle', name: 'Info', text: 'navigation.info' },
+    { icon: 'bi bi-gear', name: 'Settings', text: 'navigation.setting' },
+    
 ];
+if (process.env.NODE_ENV === 'development') {
+    defaultSlots.push({ icon: 'bi bi-map', name: 'Explore', text: 'navigation.explore' });
+}
 export const GlobalProvider = ({ children }) => {
     const [loadingText, setLoadingText] = useState(null);
     const [alertStack, setAlertStack] = useState([]);
@@ -147,7 +154,9 @@ export const GlobalProvider = ({ children }) => {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={closeAlert} variant='danger'>Close</Button>
+                    <Button onClick={closeAlert} variant='danger'>
+                        <Translated path='basics.close' as='none' />
+                    </Button>
                 </Modal.Footer>
             </Modal>
         </GlobalContext.Provider>

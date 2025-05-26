@@ -64,6 +64,11 @@ const router = createBrowserRouter([
     element: <NavLayout children={<Identify />} />,
     errorElement: <NotFound />,
   },
+    {
+    path: "/Explore",
+    element: <NavLayout children={<Info />} />,
+    errorElement: <NotFound />,
+  },
   {
     path: "/howto/:what",
     element: <NavLayout children={<HowTo />} />,

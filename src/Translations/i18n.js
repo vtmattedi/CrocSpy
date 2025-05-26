@@ -1,6 +1,9 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import translations from './locales/index'
+
+
 
 i18n
   // detect user language
@@ -12,41 +15,13 @@ i18n
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
     debug: true,
-    fallbackLng: 'en',
+    fallbackLng: 'en-US',
     returnObjects: true,
+    defaultNS: 'translations',
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
     },
-    resources: {
-      en: {
-        translation: {
-          camera:{
-            title: 'Camera',
-            photo: 'Photo',
-            swapCamera: 'Swap Camera',
-            home: 'Home',
-            save: 'Save',
-            upload: 'Upload',
-            close: 'Close',
-            title: 'Title',
-          }
-        }
-      },
-      ptBr: {
-        translation: {
-          camera:
-          {
-            title: 'Câmera',
-            photo: 'Foto',
-            swapCamera: 'Trocar Câmera',
-            home: 'Início',
-            save: 'Salvar',
-            upload: 'Enviar',
-            close: 'Fechar',
-          }
-        }
-      }
-    }
+    resources: translations,
   });
 
 export default i18n;
