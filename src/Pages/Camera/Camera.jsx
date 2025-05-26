@@ -32,7 +32,7 @@ const CameraPage = () => {
     const navigate = useNavigate();
     const [error, setError] = useState(false);
 
-    const cameraTexts = t('camera');
+
     const aspectRatioOptions = [
         { value: 16 / 9, label: '16:9' },
         { value: 4 / 3, label: '4:3' },
