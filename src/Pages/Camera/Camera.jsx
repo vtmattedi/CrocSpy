@@ -12,6 +12,7 @@ import useSound from 'use-sound';
 import shutterMp3 from './Assets/shutter.mp3';
 import NoCamera from './NoCameras/NoCameras';
 import ImgEqualizer from '../../Components/ImgEqualizer/ImgEqualizer';
+import Translated from '../../Translations/Translated';
 
 const CameraPage = () => {
     const camera = useRef(null);
@@ -269,11 +270,16 @@ const CameraPage = () => {
                                 // simply close the modal
                                 // we have already saved the photo
                                 hidePreview();
-                            }} >{cameraTexts.save}</Button>
+                            }} >
+                                <Translated path='basics.save' as='none' />
+
+                                </Button>
                             <Button onClick={() => {
                                 navigate('/Upload/' + photoId);
 
-                            }} >{cameraTexts.upload}</Button>
+                            }} >
+                                <Translated path='basics.upload' as='none' />
+                            </Button>
                             <Button onClick={() => {
                                 hidePreview();
                                 deletePhoto(photoId).then().catch((err) => {

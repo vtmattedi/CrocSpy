@@ -55,7 +55,7 @@ Found in tropical and subtropical regions around the world, including Africa, As
     }
     const { deletePhoto } = useGlobalContext();
     const hasGps = (photo) => {
-        if (photo.gps?.GPSLatitude && photo.gps?.GPSLongitude) {
+        if (photo?.gps?.GPSLatitude && photo?.gps?.GPSLongitude) {
             return true;
         }
         return false;
@@ -143,12 +143,12 @@ Found in tropical and subtropical regions around the world, including Africa, As
                                                     return (
                                                         <Carousel.Item
                                                             onClick={() => {
-                                                                navigator('/result/' + photo.id);
+                                                                navigator('/result/' + photo?.id);
                                                             }}
                                                             style={{ cursor: 'pointer' }}
                                                             key={index} >
 
-                                                            <ImgEqualizer src={photo.image} alt={photo.name} width='100%' height='50vh' bgColor='00000000' />
+                                                            <ImgEqualizer src={photo?.image} alt={photo?.name} width='100%' height='50vh' bgColor='00000000' />
 
 
                                                             <Carousel.Caption>
@@ -174,7 +174,7 @@ Found in tropical and subtropical regions around the world, including Africa, As
                                                 variant='outline-danger'
                                                 className={styles.carouselButton}
                                                 onClick={() => {
-                                                    db.photos.delete(photos[carouselIndex].id)
+                                                    db.photos.delete(photos[carouselIndex]?.id)
                                                         .then(() => {
                                                             console.log('Photo deleted');
                                                         })
@@ -197,7 +197,7 @@ Found in tropical and subtropical regions around the world, including Africa, As
                                                 variant='outline-secondary'
                                                 className={styles.carouselButton}
                                                 onClick={() => {
-                                                    saveAs(photos[carouselIndex].image, photos[carouselIndex].name + '.jpeg');
+                                                    saveAs(photos[carouselIndex]?.image, photos[carouselIndex]?.name + '.jpeg');
                                                 }}>
                                                 <div className={styles.insideButton}>
                                                     <span className="bi bi-download"></span>
@@ -205,12 +205,12 @@ Found in tropical and subtropical regions around the world, including Africa, As
                                                 </div>
                                             </Button>
                                             {
-                                                photos[carouselIndex].status === 'New' ?
+                                                photos[carouselIndex]?.status === 'New' ?
                                                     <Button
                                                         variant='outline-warning'
                                                         className={styles.carouselButton}
                                                         onClick={() => {
-                                                            navigator('/Upload/' + photos[carouselIndex].id);
+                                                            navigator('/Upload/' + photos[carouselIndex]?.id);
                                                         }}>
                                                         <div className={styles.insideButton}>
                                                             <span className="bi bi-upload"></span>
@@ -221,7 +221,7 @@ Found in tropical and subtropical regions around the world, including Africa, As
                                                         variant='outline-success'
                                                         className={styles.carouselButton}
                                                         onClick={() => {
-                                                            navigator('/result/' + photos[carouselIndex].id);
+                                                            navigator('/result/' + photos[carouselIndex]?.id);
                                                         }}>
                                                         <div className={styles.insideButton}>
                                                             <span className="bi bi-eye"></span>
@@ -231,20 +231,20 @@ Found in tropical and subtropical regions around the world, including Africa, As
                                             }
                                         </div>
                                         <div>
-                                            {photos[carouselIndex].status !== 'New' &&
+                                            {photos[carouselIndex]?.status !== 'New' &&
                                                 <div className={styles.resultContainer}>
                                                     <div className={styles.results}>
                                                         <span className={styles.resultTitle}>Species:</span>
-                                                        <span className={styles.resultVal}>{photos[carouselIndex].species}</span>
-                                                        <span className={styles.resultFamily}>({getFamily(photos[carouselIndex].species)})</span>
+                                                        <span className={styles.resultVal}>{photos[carouselIndex]?.species}</span>
+                                                        <span className={styles.resultFamily}>({getFamily(photos[carouselIndex]?.species)})</span>
                                                     </div>
                                                     <div className={styles.results}>
                                                         <span className={styles.resultTitle}>Certainty:</span>
                                                         <span className={styles.resultVal}
                                                             style={{
-                                                                color: getCertColor(photos[carouselIndex].certainty)
+                                                                color: getCertColor(photos[carouselIndex]?.certainty)
                                                             }}
-                                                        >{(photos[carouselIndex].certainty * 100).toFixed(1)}%</span>
+                                                        >{(photos[carouselIndex]?.certainty * 100).toFixed(1)}%</span>
                                                     </div>
                                                 </div>
                                             }

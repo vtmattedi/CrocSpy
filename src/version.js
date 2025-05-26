@@ -1,4 +1,4 @@
 export default {
-  version: '1.2.6',
-  buildDate: 'Sat, 24 May 2025 06:28:16 GMT'
+  version: '1.2.7',
+  buildDate: 'Mon, 26 May 2025 00:52:35 GMT'
 };

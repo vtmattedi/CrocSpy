@@ -16,11 +16,7 @@ const LanguageSelector = (props) => {
             return 'light';
         }
     }
-    useEffect(() => {
-        const t = availableLanguages.filter((language) => language.locale === locale)
-        console.log("Language: ", locale);
-        console.log("al: ", availableLanguages);
-    }, [locale]);
+   
     return (
         <Dropdown data-bs-theme={invertedTheme(theme)}>
             <Dropdown.Toggle id="dropdown-split-basic" data-bs-theme={invertedTheme(theme)}
