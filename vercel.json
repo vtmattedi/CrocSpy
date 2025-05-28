@@ -1,6 +1,5 @@
 {
   "rewrites":  [
-    {"source": "/(.*)", "destination": "/"},
     {
       "source": "/service.txt",
       "has": 
@@ -36,7 +35,8 @@
           }
         ],
       "destination": "/test/c.txt"
-    }
+    },
+    {"source": "/(.*)", "destination": "/"}
   ],
   "installCommand": "npm install --force"
 }
