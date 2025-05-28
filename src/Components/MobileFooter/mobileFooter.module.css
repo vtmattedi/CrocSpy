@@ -10,16 +10,21 @@
     left: 0;
     right: 0;
     margin-bottom: 0;
+    background-color: var(--background-color);
 }
-
+:root{
+    --ios-border-radius: 10px;
+}
 .iosBar{
     bottom: 0.5em;
-    width: 98%;
+    width: 95%;
     margin: auto;
     background-color: #999999;
-    border-radius: 10px;
+    border-radius: var(--ios-border-radius);
     color: #000;
 }
+
+
 
 .slot {
     display: flex;
@@ -32,10 +37,10 @@
 }
 
 .slotIosLeft {
-    border-radius: 10px 0 0 10px;
+    border-radius: var(--ios-border-radius) 0 0 var(--ios-border-radius);
 }
 .slotIosRight {
-     border-radius: 0px 10px 10px 0;
+     border-radius: 0px var(--ios-border-radius) var(--ios-border-radius) 0;
 }
 
 .slot:hover {

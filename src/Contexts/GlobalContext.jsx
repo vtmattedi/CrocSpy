@@ -26,6 +26,8 @@ export const GlobalProvider = ({ children }) => {
     const [showAlert, setShowAlert] = useState(false);
     const [showLoading, setShowLoading] = useState(false);
     const [slots, setSlots] = useState(defaultSlots)
+    const [offline, setOffline] = useState(false);
+    const [forceIos, setForceIos] = useState(false);
 
     const getCurrentAlert = () => {
         return alertStack.length > 0 ? alertStack[alertStack.length - 1] : null;
@@ -126,10 +128,26 @@ export const GlobalProvider = ({ children }) => {
             setShowAlert(false);
         }
     }, [alertStack]);
+    useEffect(() => {
+        window.addEventListener('offline', () => {
+            setOffline(true);
+            addAlert({
+                title: <Translated path='basics.offline_title' as='none' />,
+                text: <Translated path='basics.offline_text' as='none' />
+            });
+        });
+        window.addEventListener('online', () => {
+            setOffline(false);
+            addAlert({
+                title: <Translated path='basics.online_title' as='none' />,
+                text: <Translated path='basics.online_text' as='none' />
+            });
+        });
+    }, []);
 
     const { theme } = useTheme();
     return (
-        <GlobalContext.Provider value={{ addAlert, closeAlert, getCurrentAlert, savePhoto, deletePhoto, editPhoto, slots, setSlots }}>
+        <GlobalContext.Provider value={{ addAlert, closeAlert, getCurrentAlert, savePhoto, deletePhoto, editPhoto, slots, setSlots, offline, forceIos, setForceIos}}>
             {children}
             <Modal show={showAlert} data-bs-theme={theme}
                 style={{

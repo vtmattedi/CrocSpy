@@ -19,6 +19,16 @@ import Result from './Pages/Result/Result.jsx'
 import Identify from './Pages/Identify/Identify.jsx'
 import Upload from './Pages/Upload/Upload.jsx'
 import HowTo from './Pages/HowTo/HowTo.jsx'
+import Ws from './Pages/Tests/ws.jsx'
+if (process.env.REACT_APP_CACHE_ENABLE === 'true') {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/serviceworker.js');
+    });
+  }
+
+}
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -46,7 +56,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/test",
-    element: <NavLayout children={<Test />} />,
+    element: <NavLayout children={<Home />} />,
     errorElement: <NotFound />,
   },
   {
@@ -64,7 +74,7 @@ const router = createBrowserRouter([
     element: <NavLayout children={<Identify />} />,
     errorElement: <NotFound />,
   },
-    {
+  {
     path: "/Explore",
     element: <NavLayout children={<Info />} />,
     errorElement: <NotFound />,
@@ -72,12 +82,6 @@ const router = createBrowserRouter([
   {
     path: "/howto/:what",
     element: <NavLayout children={<HowTo />} />,
-    errorElement: <NotFound />,
-
-  },
-  {
-    path: "landing",
-    element: <Landing/>,
     errorElement: <NotFound />,
 
   },

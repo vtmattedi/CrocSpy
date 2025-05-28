@@ -23,7 +23,7 @@ const MobileFooter = () => {
     const [ios, setIos] = useState(false);
 
     const [showSettings, setShowSettings] = useState(false);
-    const { slots } = useGlobalContext();
+    const { slots, forceIos } = useGlobalContext();
     const handleClick = (page) => {
         navigator('/' + page);
     }
@@ -44,8 +44,8 @@ const MobileFooter = () => {
 
         mobile ? (
             <>
-                <div className={`${styles.spaceReserve}  ${(ios? styles.iosSpaceReserve : "")}`}></div>
-                <div className={`${styles.bar}  ${(ios? styles.iosBar : "")}`}>
+                <div className={`${styles.spaceReserve}  ${((ios || forceIos)? styles.iosSpaceReserve : "")}`}></div>
+                <div className={`${styles.bar}  ${((ios || forceIos)? styles.iosBar : "")}`}>
                     {slots.map((page, index) => (
                         <div key={index} className={`${styles.slot}  ${(ios && index === 0 ? styles.slotIosLeft : "")} ${(ios && index === slots.length-1 ? styles.slotIosRight: "")}`}
                             onClick={() => {

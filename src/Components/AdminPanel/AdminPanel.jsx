@@ -10,14 +10,17 @@ import Version from '../../version';
 const AdminPanel = ({ show, setShow, setShowParent }) => {
     const navigator = useNavigate();
     const { theme } = useTheme();
-    const { addAlert } = useGlobalContext();
+    const { addAlert, forceIos, setForceIos } = useGlobalContext();
     const pages = [
         { name: '404', path: '/404' },
         { name: 'Install App', path: '/howto/installapp' },
         { name: 'Identify Croc', path: '/howto/identifycroc' },
         { name: 'Camera', path: '/camera' },
-        { name: 'Landing', path: '/?stay' },
+        { name: 'Landing', path: '/?stay' }
     ];
+    if (process.env.NODE_ENV === 'development') pages.push({ name: 'Test', path: '/test' });
+
+    
     const getDatediff = () => {
         const date1 = new Date(Version.buildDate);
         const date2 = new Date(new Date().toUTCString()); // convert date2 to gmt 0 (assume -3 gmt)
@@ -87,7 +90,12 @@ const AdminPanel = ({ show, setShow, setShowParent }) => {
                 <div className='d-flex flex-column align-items-center mt-1'>
                     <span style={{ fontSize: '1em' }}>{getDatediff()}</span>
                 </div>
-
+                <div className='d-flex align-items-center mt-1 justify-content-center align-items-center gap-2'>
+                    Force iOS: 
+                    <div className='form-check form-switch' style={{alignContent:"center"}} >
+                    <input type='checkbox' className='form-check-input' checked={forceIos} onChange={(e) => setForceIos(e.target.checked)} />
+                    </div>
+                </div>
             </Offcanvas.Body>
         </Offcanvas>
 

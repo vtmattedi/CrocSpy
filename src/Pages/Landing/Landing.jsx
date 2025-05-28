@@ -20,7 +20,7 @@ const Landing = () => {
             value: 3,
         }
     ]
-    const [currOpt, setCurrOpt] = useState(1);
+    const [currOpt, setCurrOpt] = useState(3);
 
     return (
         <>
