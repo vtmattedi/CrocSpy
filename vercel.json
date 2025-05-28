@@ -6,7 +6,7 @@
         {
           "type": "header",
           "key": "accept-language",
-          "value": "(^pt(-BR)?"
+          "value": "^pt(-BR)?"
         }
       ],
       "destination": "/br/site.webmanifest"
