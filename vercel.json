@@ -1,6 +1,42 @@
 {
   "rewrites":  [
-    {"source": "/(.*)", "destination": "/"}
+    {"source": "/(.*)", "destination": "/"},
+    {
+      "source": "/service.txt",
+      "has": 
+        [
+          {
+            "type": "header",
+            "key": "test",
+            "value": "a"
+          }
+        ],
+      "destination": "/test/a.txt"
+    },
+    {
+      "source": "/service.txt",
+      "has": 
+        [
+          {
+            "type": "header",
+            "key": "test",
+            "value": "b"
+          }
+        ],
+      "destination": "/test/b.txt"
+    },
+    {
+      "source": "/service.txt",
+      "has": 
+        [
+          {
+            "type": "header",
+            "key": "test",
+            "value": "c"
+          }
+        ],
+      "destination": "/test/c.txt"
+    }
   ],
   "installCommand": "npm install --force"
 }
