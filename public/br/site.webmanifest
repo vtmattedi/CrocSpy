@@ -9,7 +9,7 @@
     "description": "Croc Spy App, O aplicativo para identificar crocodilianos.",
     "shortcuts": [
         {
-            "name": "Identify Croc",
+            "name": "Identinficar um Croc",
             "url": "/Identify",
             "icons": [
                 {
@@ -19,7 +19,7 @@
             
         },
         {
-            "name": "Croc Map",
+            "name": "Croc Mapa",
             "url": "/Map",
             "icons": [
                 {
