@@ -2,7 +2,6 @@ import { Button } from 'react-bootstrap';
 import Header from '../../Components/Header/Header';
 import React, { useEffect, useState } from 'react';
 import styles from './Landing.module.css';
-import crocEyeImg from '../../assets/crocEye.png';
 import Form from 'react-bootstrap/Form';
 import { useTos } from '../../Contexts/TOSContext';
 import { Modal } from 'react-bootstrap';
@@ -10,11 +9,10 @@ import { useNavigate } from 'react-router-dom';
 import { useTheme } from '../../Contexts/ThemeContext';
 import { useSound } from 'use-sound';
 import biteMp3 from './Assets/bite.mp3';
-import bgMp3 from './Assets/bg.mp3';
-import LanguageSelector from '../../Components/LanguageSelector/LanguageSelector';
 import { saveAs } from 'file-saver';
 import { TOS_VERSION, getTos } from '../../assets/tos';
 import { useLocation } from 'react-router-dom';
+
 const Landing1 = () => {
     const [bite] = useSound(biteMp3, { volume: 0.5 })
    
@@ -58,7 +56,7 @@ const Landing1 = () => {
     }, [tosAccepted, location]);
     return (
         <>
-            <div className={styles.logoDiv} style={{ backgroundImage: `url(${crocEyeImg})` }}>
+            <div className={styles.logoDiv} style={{ backgroundImage: `url(${'./crocEye.png'})` }}>
 
                 <div className={styles.contentContainer}>
                     <div className={styles.contentDiv}>

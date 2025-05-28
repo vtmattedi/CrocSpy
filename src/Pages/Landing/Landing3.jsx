@@ -1,8 +1,6 @@
 import { Button } from 'react-bootstrap';
 import React, { useEffect, useState } from 'react';
 import styles from './Landing3.module.css';
-import crocParty from './Assets/crocParty.png';
-import crocPartyMobile from './Assets/crocPartyMobile.png';
 import Form from 'react-bootstrap/Form';
 import { useTos } from '../../Contexts/TOSContext';
 import { Modal } from 'react-bootstrap';
@@ -54,8 +52,7 @@ const Landing3 = () => {
     return (
         <>
             <div className={styles.logoDiv} style={{
-                backgroundImage: `url(${mobile ? crocPartyMobile : crocParty
-                    })`
+                backgroundImage: `url(${mobile ? './crocPartyMobile.png' : './crocParty.png'})`,
             }}>
 
                 <div className={styles.contentContainer}>
