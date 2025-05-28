@@ -1,22 +1,24 @@
 {
-  "rewrites":  [
+  "rewrites": [
     {
       "source": "/site.webmanifest",
-      "has": 
-        [
-          {
-            "type": "header",
-            "key": "accept-language",
-            "value": "pt-BR"
-          }
-        ],
+      "has": [
+        {
+          "type": "header",
+          "key": "accept-language",
+          "value": "^pt(-BR)?(?=,|$)"
+        }
+      ],
       "destination": "/br/site.webmanifest"
     },
-     {
+    {
       "source": "/site.webmanifest",
       "destination": "/en/site.webmanifest"
     },
-    {"source": "/(.*)", "destination": "/"}
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
   ],
   "installCommand": "npm install --force"
 }

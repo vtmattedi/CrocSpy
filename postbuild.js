@@ -26,6 +26,12 @@ async function listFilesRecursive(dir, currentPath = '') {
         if (entry.isDirectory()) {
             results = results.concat(await listFilesRecursive(fullPath, currentPath + entry.name + '/'));
         } else {
+            if (entry.name === 'serviceworker.js') {
+                continue; // Skip serviceworker.js
+                //Do not self cache the service worker
+                //However navigator.serviceWorker.register('service-worker.js)
+                //is not intercepted by the service worker itself
+            }
             results.push(currentPath + entry.name);
         }
     }
