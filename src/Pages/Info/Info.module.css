@@ -59,7 +59,10 @@
 
 .sectionText {
   text-align: justify;
-  text-indent: 2em
+
+}
+.sectionText div {
+    text-indent: 2em;
 }
 
 .sectionText h2 {
