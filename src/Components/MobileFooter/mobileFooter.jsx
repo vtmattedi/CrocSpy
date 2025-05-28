@@ -47,7 +47,7 @@ const MobileFooter = () => {
                 <div className={`${styles.spaceReserve}  ${((ios || forceIos)? styles.iosSpaceReserve : "")}`}></div>
                 <div className={`${styles.bar}  ${((ios || forceIos)? styles.iosBar : "")}`}>
                     {slots.map((page, index) => (
-                        <div key={index} className={`${styles.slot}  ${(ios && index === 0 ? styles.slotIosLeft : "")} ${(ios && index === slots.length-1 ? styles.slotIosRight: "")}`}
+                        <div key={index} className={`${styles.slot}  ${((ios || forceIos) && index === 0 ? styles.slotIosLeft : "")} ${((ios || forceIos) && index === slots.length-1 ? styles.slotIosRight: "")}`}
                             onClick={() => {
                                 if (page.name === 'Settings') {
                                     setShowSettings(true);
