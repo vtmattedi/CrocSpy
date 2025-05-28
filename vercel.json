@@ -7,7 +7,7 @@
           {
             "type": "header",
             "key": "accept-language",
-            "value": "a"
+            "value": "pt-BR"
           }
         ],
       "destination": "/br/site.webmanifest"
