@@ -1,40 +1,20 @@
 {
   "rewrites":  [
     {
-      "source": "/service.txt",
+      "source": "/site.webmanifest",
       "has": 
         [
           {
             "type": "header",
-            "key": "test",
+            "key": "accept-language",
             "value": "a"
           }
         ],
-      "destination": "/test/a.txt"
+      "destination": "/br/site.webmanifest"
     },
-    {
-      "source": "/service.txt",
-      "has": 
-        [
-          {
-            "type": "header",
-            "key": "test",
-            "value": "b"
-          }
-        ],
-      "destination": "/test/b.txt"
-    },
-    {
-      "source": "/service.txt",
-      "has": 
-        [
-          {
-            "type": "header",
-            "key": "test",
-            "value": "c"
-          }
-        ],
-      "destination": "/test/c.txt"
+     {
+      "source": "/site.webmanifest",
+      "destination": "/en/site.webmanifest"
     },
     {"source": "/(.*)", "destination": "/"}
   ],

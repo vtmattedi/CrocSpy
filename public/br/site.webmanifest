@@ -1,0 +1,45 @@
+{
+    "name": "Croc Spy App",
+    "short_name": "Croc Spy",
+    "icons": [
+        {
+            "src": "/croc3.svg"
+        }
+    ],
+    "description": "Croc Spy App, O aplicativo para identificar crocodilianos.",
+    "shortcuts": [
+        {
+            "name": "Identify Croc",
+            "url": "/Identify",
+            "icons": [
+                {
+                    "src": "/croc3.svg"
+                }
+            ]
+            
+        },
+        {
+            "name": "Croc Map",
+            "url": "/Map",
+            "icons": [
+                {
+                    "src": "/croc3.svg"
+                }
+            ]
+        },
+        {
+            "name": "Croc Camera",
+            "url": "/Camera",
+            "icons": [
+                {
+                    "src": "/croc3.svg"
+                }
+            ]
+        }
+    ],
+    "start_url": ".",
+    "theme_color": "#333",
+    "background_color": "#333",
+    "display": "standalone",
+    "orientation": "portrait-primary"
+}

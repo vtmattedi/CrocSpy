@@ -7,13 +7,28 @@
         }
     ],
     "description": "Croc Spy App, the best app for spying on crocodiles.",
+    "screenshots": [
+        {
+            "src": "/screenshot1.png",
+            "sizes": "640x480",
+            "type": "image/png",
+            "form_factor": "any"
+        },
+        {
+            "src": "/screenshot2.png",
+            "sizes": "640x480",
+            "type": "image/png",
+            "form_factor": "any"
+        }
+    ],
     "shortcuts": [
         {
             "name": "Identify Croc",
             "url": "/Identify",
             "icons": [
                 {
-                    "src": "/croc3.svg"
+                    "src": "/croc3.svg",
+                    "sizes": "192x192"
                 }
             ]
             
@@ -23,7 +38,8 @@
             "url": "/Map",
             "icons": [
                 {
-                    "src": "/croc3.svg"
+                    "src": "/croc3.svg",
+                    "sizes": "192x192"
                 }
             ]
         },
