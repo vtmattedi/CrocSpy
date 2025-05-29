@@ -8,8 +8,6 @@ The app can now be used offline:
 
 Implemented a service worker and caching for the page resources.
 
-
-
 Main Packages Used:
 
 * leaflet for the map.
