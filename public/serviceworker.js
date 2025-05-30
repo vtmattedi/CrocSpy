@@ -1,5 +1,5 @@
 
-const CACHE_NAME = 'croc-spy-cache-v';
+const CACHE_NAME = 'croc-spy-cache';
 const CACHE_VERSION = 'v2';
 
 // Files to be cached by the service worker
@@ -14,7 +14,7 @@ self.addEventListener('install', event => {
     async () => {
       cache = await caches.open(`${CACHE_NAME}-${CACHE_VERSION}`);
       console.log('Service Worker: Caching Files', FILENAMES.length);
-      await cache.addAll(FILENAMES);
+      cache.addAll(FILENAMES);
       self.skipWaiting();
     }
   );
