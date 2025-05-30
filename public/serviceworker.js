@@ -1,83 +1,27 @@
 
 const CACHE_NAME = 'croc-spy-cache';
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = 'v1';
 
+// Files to be cached by the service worker
 // Do not remove the comments below, they are used by postbuild.js to inject the file list
 //%FILENAMES%
-const FILENAMES =[
-  "./android-chrome-192x192.png",
-  "./android-chrome-512x512.png",
-  "./apple-touch-icon.png",
-  "./assets/bg-3JFsPf48.mp3",
-  "./assets/bite-zijO9hDJ.mp3",
-  "./assets/bootstrap-icons-BeopsB42.woff",
-  "./assets/bootstrap-icons-mSm7cUeB.woff2",
-  "./assets/ChatGPTcrocAnatomy-Ctp8WuuS.png",
-  "./assets/ChatGPTcrocBehaviour-mNFfiF4t.png",
-  "./assets/ChatGPTcrocDistribution-CFt4buOf.png",
-  "./assets/ChatGPTcrocEvolution-CyctQp2q.png",
-  "./assets/ChatGPTcrocFamily-BlNAmC1w.png",
-  "./assets/ChatGPTcrocHist-CBoGy9tc.png",
-  "./assets/croc0-BlK8CbYB.png",
-  "./assets/croc1-DrwShtkQ.png",
-  "./assets/croc2-Cw9Qlgo1.png",
-  "./assets/croc3-aoUYfnbq.png",
-  "./assets/croc4-DCs9ol2I.png",
-  "./assets/croc5-DsgqB6Wt.png",
-  "./assets/croc6-a-6BFKh-.png",
-  "./assets/croc7-DhRqps4D.png",
-  "./assets/croc8-BFf9bcep.png",
-  "./assets/crocEye-Dzy9u3uI.png",
-  "./assets/croclockhomes-DBDSfOrq.png",
-  "./assets/croclockhomesclosed-B2ClPhnC.png",
-  "./assets/crocParty-Dv-8MfG1.png",
-  "./assets/crocPartyMobile-CGDTBOF9.png",
-  "./assets/howler-CoXO_3kd.js",
-  "./assets/index-Dm5vgb2Z.js",
-  "./assets/index-fJtg8Dzf.css",
-  "./assets/logo2-4v7iL4eM.svg",
-  "./assets/shutter-BR8FDDCF.mp3",
-  "./assets/whoisthat-DDW8OVwN.mp3",
-  "./croc1.svg",
-  "./croc2.svg",
-  "./croc3.svg",
-  "./favicon-16x16.png",
-  "./favicon-32x32.png",
-  "./favicon.ico",
-  "./index.html",
-  "./serviceworker.js",
-  "./site.webmanifest"
-];
-const ROUTES = [
-  "/",
-  "/map",
-  "/camera",
-  "/info",
-  "/home",
-  "/test",
-  "/result/:id",
-  "/Upload/:id",
-  "/Identify",
-  "/Explore",
-  "/howto/:what",
-  "/404"
-];
 //%FILENAMESEND% Do not remove this comment, it is used by postbuild.js to inject the file list
-const ROUTES_REGEX = new RegExp(`^(${ROUTES.map(route => route.toLowerCase().replace(/:[^/]+/g, '[^/]+')).join('|')})$`);
 self.addEventListener('install', event => {
   // Nothing to cache yet, but we can log the installation
   console.log('Service Worker installing.');
+
   event.waitUntil(
     caches.open(`${CACHE_NAME}-${CACHE_VERSION}`).then(cache => {
       console.log('Caching files during service worker installation:', FILENAMES.length);
-      console.log('REGEX:', ROUTES_REGEX);
       cache.addAll(FILENAMES);
     })
   );
+  self.skipWaiting(); // Skip waiting to activate immediately
 });
 
 self.addEventListener('activate', event => {
   console.log('Service Worker activating.');
+  self.skipWaiting(); // Skip waiting to activate immediately
   // Clean up old caches
   event.waitUntil(
     caches.keys().then(cacheNames => {
@@ -93,19 +37,45 @@ self.addEventListener('activate', event => {
   );
 });
 
-self.addEventListener('fetch', event => {
-  //console.log('Service Worker fetching:', event.request.url);
-  const uri = new URL(event.request.url).pathname.toLowerCase();
-  const isRoute = ROUTES_REGEX.test(uri);
-  const urlToTest = isRoute ? './index.html' : event.request.url;
-  event.respondWith(
-     (async () => {
-      // Try to get the response from a cache.
-      const cachedResponse = await caches.match(urlToTest);
-      // Return it if we found one.
-      if (cachedResponse) return cachedResponse;
-      // If we didn't find a match in the cache, use the network.
-      return fetch(event.request);
-    })(),
-  )
+const isPageRoute = (uri) => {
+  const ext = uri.split('.')
+  if (ext.length > 1) {
+    const fileExt = ext[ext.length - 1].toLowerCase();
+    return fileExt === 'html' || fileExt === 'htm' || fileExt === '';
+  }
+  return true;
+
+}
+
+self.addEventListener('fetch', (event) => {
+  const uri = new URL(event.request.url).pathname
+  const ISROUTE = /(\.(htm(l)?)$)|(^[^\.]*.?$)/.test(uri)
+  // if file ends with .html or .htm or has no extension
+  // we consider it a route and serve the index.html since we are using a single-page application model
+  const urlToTest = ISROUTE ? './index.html' : uri;
+  // Check if this is one of the routes we want to cache
+  if (ISROUTE || FILENAMES.includes(urlToTest) || urlToTest.indexOf("flag-icons/flags/4x3") !== -1) {
+    event.respondWith(caches.open(`${CACHE_NAME}-${CACHE_VERSION}`).then(async (cache) => {
+      const cachedResponse = await cache.match(urlToTest);
+      const fetchedResponse = fetch(event.request).then((networkResponse) => {
+        //stale while revalidate
+        if (networkResponse.ok)
+          cache.put(urlToTest, networkResponse.clone());
+        return networkResponse;
+      });
+      if (cachedResponse)
+      {
+        //console.log('Serving from cache:', urlToTest);
+        return cachedResponse;
+      }
+      else{
+        //console.log('Fetching from network:', urlToTest);
+        // If we have no cached response, we fetch from the networkk
+        return fetchedResponse;
+      }
+    }));
+  } else {
+    return;
+  }
+  
 });

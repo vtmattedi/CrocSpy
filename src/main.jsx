@@ -26,7 +26,6 @@ if (process.env.REACT_APP_CACHE_ENABLE === 'true') {
       navigator.serviceWorker.register('/serviceworker.js');
     });
   }
-
 }
 
 const router = createBrowserRouter([

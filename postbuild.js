@@ -32,7 +32,7 @@ async function listFilesRecursive(dir, currentPath = '') {
                 //However navigator.serviceWorker.register('service-worker.js)
                 //is not intercepted by the service worker itself
             }
-            results.push(currentPath + entry.name);
+            results.push((currentPath + entry.name)); // Remove leading slash
         }
     }
     return results;
@@ -42,7 +42,7 @@ async function listFilesRecursive(dir, currentPath = '') {
     const distDir = path.resolve('./dist');
     try {
         const route = await routes('./src');
-        const files = await listFilesRecursive(distDir, './');
+        const files = await listFilesRecursive(distDir, '/');
         const swPath = path.join(distDir, 'serviceworker.js');
         let swContent = await fs.readFile(swPath, 'utf8');
         const start = swContent.indexOf('//%FILENAMES%');

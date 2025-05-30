@@ -4,9 +4,8 @@ The Croc Spy project aims to build an AI to help identify and cataloge crocodili
 
 This app is a PWA that connects users with AI. It was built using React + Vite.
 
-The app can now be used offline:
-
-Implemented a service worker and caching for the page resources.
+### Caching
+The 
 
 Main Packages Used:
 
