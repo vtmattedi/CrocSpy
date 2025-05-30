@@ -1,6 +1,6 @@
 
 const CACHE_NAME = 'croc-spy-cache-v';
-const CACHE_VERSION = '2';
+const CACHE_VERSION = 'v2';
 
 // Files to be cached by the service worker
 // Do not remove the comments below, they are used by postbuild.js to inject the file list
@@ -11,12 +11,13 @@ self.addEventListener('install', event => {
   // Nothing to cache yet, but we can log the installation
   console.log('Service Worker installing.');
   event.waitUntil(
-    caches.open(`${CACHE_NAME}-${CACHE_VERSION}`).then(cache => {
-      console.log('Caching files during service worker installation:', FILENAMES.length);
-      cache.addAll(FILENAMES);
-    })
+    async () => {
+      cache = await caches.open(`${CACHE_NAME}-${CACHE_VERSION}`);
+      console.log('Service Worker: Caching Files', FILENAMES.length);
+      await cache.addAll(FILENAMES);
+      self.skipWaiting();
+    }
   );
-  self.skipWaiting(); // Skip waiting to activate immediately
 });
 
 self.addEventListener('activate', event => {
@@ -63,12 +64,11 @@ self.addEventListener('fetch', (event) => {
           cache.put(urlToTest, networkResponse.clone());
         return networkResponse;
       });
-      if (cachedResponse)
-      {
+      if (cachedResponse) {
         //console.log('Serving from cache:', urlToTest);
         return cachedResponse;
       }
-      else{
+      else {
         //console.log('Fetching from network:', urlToTest);
         // If we have no cached response, we fetch from the networkk
         return fetchedResponse;
@@ -77,5 +77,5 @@ self.addEventListener('fetch', (event) => {
   } else {
     return;
   }
-  
+
 });
