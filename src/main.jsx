@@ -20,7 +20,7 @@ import Identify from './Pages/Identify/Identify.jsx'
 import Upload from './Pages/Upload/Upload.jsx'
 import HowTo from './Pages/HowTo/HowTo.jsx'
 import Ws from './Pages/Tests/ws.jsx'
-if (process.env.REACT_APP_CACHE_ENABLE === 'true') {
+if (process.env.REACT_APP_ENABLE_CACHE === 'true') {
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/serviceworker.js');
