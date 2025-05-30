@@ -63,6 +63,12 @@ self.addEventListener('fetch', (event) => {
         if (networkResponse.ok)
           cache.put(urlToTest, networkResponse.clone());
         return networkResponse;
+      }).catch((error) =>{
+        console.error('Fetch failed: ', error);
+        return new Response('Network error occurred', {
+          status: 408,
+          statusText: 'Network Error'
+        });
       });
       if (cachedResponse) {
         //console.log('Serving from cache:', urlToTest);
