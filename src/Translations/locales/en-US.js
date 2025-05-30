@@ -14,6 +14,16 @@ export default {
             about: 'About',
             version: 'Version',
             tos: 'Terms of Service',
+            online:{
+                plain: 'Online',
+                title: 'You are online',
+                text: 'You can now access all features of the app.',
+            },
+            offline: {
+                plain: 'Offline',
+                title: 'You are offline',
+                text: 'Some features may not be available.',
+            },
 
         },
         navigation: {

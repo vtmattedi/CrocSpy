@@ -45,6 +45,12 @@ async function listFilesRecursive(dir, currentPath = '') {
         const files = await listFilesRecursive(distDir, '/');
         const swPath = path.join(distDir, 'serviceworker.js');
         let swContent = await fs.readFile(swPath, 'utf8');
+        const cacheVersionRegex = /const\s+CACHE_VERSION\s*=\s*['"`]v(.*?)['"`];/;
+        swContent = swContent.replace(cacheVersionRegex, (match, p1) => {
+            let versionNum = parseInt(p1, 10);
+            if (isNaN(versionNum)) versionNum = 1;
+            return `const CACHE_VERSION = 'v${versionNum + 1}';`;
+        });
         const start = swContent.indexOf('//%FILENAMES%');
         const end = swContent.indexOf('//%FILENAMESEND%');
         if (start === -1 || end === -1) {

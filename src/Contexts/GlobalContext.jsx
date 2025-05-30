@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
-import { Modal } from 'react-bootstrap';
+import { Modal, Toast, ToastContainer } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { useTheme } from './ThemeContext';
 import { db } from '../../db';
 import exploreSVG from '../assets/binoculars.svg';
-import { Trans } from 'react-i18next';
 import Translated from '../Translations/Translated';
+import usePageWidth from '../Hooks/PageWidth';
+import { icon } from 'leaflet';
 const GlobalContext = createContext(undefined);
 
 const defaultSlots = [
@@ -15,7 +16,7 @@ const defaultSlots = [
     { icon: 'bi bi-search', name: 'Identify', text: 'navigation.identify' },
     { icon: 'bi bi-info-circle', name: 'Info', text: 'navigation.info' },
     { icon: 'bi bi-gear', name: 'Settings', text: 'navigation.setting' },
-    
+
 ];
 if (process.env.NODE_ENV === 'development') {
     defaultSlots.push({ icon: 'bi bi-map', name: 'Explore', text: 'navigation.explore' });
@@ -24,11 +25,19 @@ export const GlobalProvider = ({ children }) => {
     const [loadingText, setLoadingText] = useState(null);
     const [alertStack, setAlertStack] = useState([]);
     const [showAlert, setShowAlert] = useState(false);
-    const [showLoading, setShowLoading] = useState(false);
+    const [showLoading, setShowLoading] = useState(true);
     const [slots, setSlots] = useState(defaultSlots)
     const [offline, setOffline] = useState(false);
     const [forceIos, setForceIos] = useState(false);
-
+    const { mobile } = usePageWidth();
+    const [toastData, setToastData] = useState({
+        show: false,
+        title: 'Title',
+        icon: 'bi bi-info-circle',
+        iconColor: 'var(--bs-info)',
+        text: 'You should never see this message, it is just a placeholder',
+        time: 'a long long time ago',
+    });
     const getCurrentAlert = () => {
         return alertStack.length > 0 ? alertStack[alertStack.length - 1] : null;
     }
@@ -128,27 +137,64 @@ export const GlobalProvider = ({ children }) => {
             setShowAlert(false);
         }
     }, [alertStack]);
+
+
     useEffect(() => {
-        window.addEventListener('offline', () => {
-            setOffline(true);
-            addAlert({
-                title: <Translated path='basics.offline_title' as='none' />,
-                text: <Translated path='basics.offline_text' as='none' />
-            });
-        });
-        window.addEventListener('online', () => {
-            setOffline(false);
-            addAlert({
-                title: <Translated path='basics.online_title' as='none' />,
-                text: <Translated path='basics.online_text' as='none' />
-            });
-        });
+        const setInternet = (status) => {
+            const online = status === 'online';
+            setOffline(!online);
+            if (online) {
+                setToastData({
+                    show: true,
+                    title: <Translated path='basics.online.title' as='none' />,
+                    icon: 'bi bi-wifi',
+                    iconColor: 'var(--bs-success)',
+                    text: <Translated path='basics.online.text' as='none' />,
+                    time: new Date().toLocaleTimeString()
+                });
+            } else {
+                setToastData({
+                    show: true,
+                    title: <Translated path='basics.offline.title' as='none' />,
+                    icon: 'bi bi-wifi-off',
+                    iconColor: 'var(--bs-danger)',
+                    text: <Translated path='basics.offline.text' as='none' />,
+                    time: new Date().toLocaleTimeString()
+                });
+            }
+        }
+        window.addEventListener('offline', () => { setInternet('offline') });
+        window.addEventListener('online', () => { setInternet('online') });
+
+        return () => {
+            window.removeEventListener('offline', () => { setInternet('offline') });
+            window.removeEventListener('online', () => { setInternet('offline') });
+        }
     }, []);
 
     const { theme } = useTheme();
     return (
-        <GlobalContext.Provider value={{ addAlert, closeAlert, getCurrentAlert, savePhoto, deletePhoto, editPhoto, slots, setSlots, offline, forceIos, setForceIos}}>
+        <GlobalContext.Provider value={{ addAlert, closeAlert, getCurrentAlert, savePhoto, deletePhoto, editPhoto, slots, setSlots, offline, forceIos, setForceIos }}>
             {children}
+            <ToastContainer
+                className="p-3"
+                position={mobile ? 'top-center' : 'bottom-end'}
+            >
+                <Toast data-bs-theme={theme} style={{
+                    color: theme === 'dark' ? 'white' : 'black',
+                }} show={toastData.show} onClose={() => setToastData((prev)=> {return { ...prev, show: false }})} delay={5000} autohide>
+                    <Toast.Header>
+                            <span className={`${toastData.icon}`} style={{color:toastData.iconColor}} />
+                            <strong className="me-auto"
+                                style={{
+                                    marginLeft: '1em',
+                                }}
+                            >{toastData.title}</strong>
+                        <small>{toastData.time}</small>
+                    </Toast.Header>
+                    <Toast.Body>{toastData.text}</Toast.Body>
+                </Toast>
+            </ToastContainer>
             <Modal show={showAlert} data-bs-theme={theme}
                 style={{
                     color: theme === 'dark' ? 'white' : 'black',
@@ -167,7 +213,6 @@ export const GlobalProvider = ({ children }) => {
                     }}
                 >
                     <div style={{ textAlign: 'justify' }}>
-
                         {getCurrentAlert()?.text}
                     </div>
                 </Modal.Body>

@@ -1,15 +1,15 @@
 
-const CACHE_NAME = 'croc-spy-cache';
-const CACHE_VERSION = 'v1';
+const CACHE_NAME = 'croc-spy-cache-v';
+const CACHE_VERSION = '2';
 
 // Files to be cached by the service worker
 // Do not remove the comments below, they are used by postbuild.js to inject the file list
 //%FILENAMES%
+FILENAMES = ['nothing-to-cache'];
 //%FILENAMESEND% Do not remove this comment, it is used by postbuild.js to inject the file list
 self.addEventListener('install', event => {
   // Nothing to cache yet, but we can log the installation
   console.log('Service Worker installing.');
-
   event.waitUntil(
     caches.open(`${CACHE_NAME}-${CACHE_VERSION}`).then(cache => {
       console.log('Caching files during service worker installation:', FILENAMES.length);
