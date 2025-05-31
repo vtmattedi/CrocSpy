@@ -79,7 +79,7 @@ const MobileFooter = () => {
                 >
                     <div className={`${styles.container}  ${(ios ? styles.iosContainer : "")}`} data-bs-theme={theme}
                       style={{
-                        height: getHeight( ios? 2 : 1),
+                        height: getHeight(( ios? 2 : 1) - testAB.noMargin ? 1:0),
                       }}
                     >
                         {slots.map((page, index) => (

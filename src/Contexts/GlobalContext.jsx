@@ -34,6 +34,7 @@ export const GlobalProvider = ({ children }) => {
         altcolor: false,
         biggericons: false,
         iconstext: false,
+        noMargin = false
     });
     const { mobile } = usePageWidth();
     const [toastData, setToastData] = useState({

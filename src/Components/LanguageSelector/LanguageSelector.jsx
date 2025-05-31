@@ -37,16 +37,8 @@ const LanguageSelector = (props) => {
                                 onClick={() => {
                                     //console.log("Language: ", language.locale);
 
-                                    if (process.env.REACT_APP_USE_TRANSLATION === 'true') {
-                                        setLocale(language.locale);
-                                    }
-                                    else {
-
-                                        addAlert({
-                                            title: 'English Only',
-                                            text: `Altough this button is here, the app is only available in English for now.\n Once the translations are ready, the app will automatically swap to the prefered language.`,
-                                        })
-                                    }
+                                    setLocale(language.locale);
+                                    
                                 }
                                 }>
                                 <div className={styles.languageItem}>

@@ -9,7 +9,7 @@ import Version from '../../version';
 
 const AdminPanel = ({ show, setShow, setShowParent }) => {
     const navigator = useNavigate();
-    const { theme } = useTheme();
+    const { theme, forceEnable, setForceEnable } = useTheme();
     const { addAlert, testAB, setTestAB } = useGlobalContext();
     const pages = [
         { name: '404', path: '/404' },
@@ -120,6 +120,18 @@ const AdminPanel = ({ show, setShow, setShowParent }) => {
                     Icons With Text:
                     <div className='form-check form-switch' style={{ alignContent: "center" }} >
                         <input type='checkbox' className='form-check-input' checked={testAB.iconstext} onChange={(e) => setTestAB({ ...testAB, iconstext: e.target.checked })} />
+                    </div>
+                </div>
+                <div className='d-flex align-items-center mt-1 justify-content-center align-items-center gap-2'>
+                    Enable parcial Translations:
+                    <div className='form-check form-switch' style={{ alignContent: "center" }} >
+                        <input type='checkbox' className='form-check-input' checked={forceEnable} onChange={(e) => ssetForceEnable(e.target.checked)} />
+                    </div>
+                </div>
+                <div className='d-flex align-items-center mt-1 justify-content-center align-items-center gap-2'>
+                    No Margin Bottom:
+                    <div className='form-check form-switch' style={{ alignContent: "center" }} >
+                        <input type='checkbox' className='form-check-input' checked={testAB.noMargin} onChange={(e) => setTestAB({ ...testAB, noMargin: e.target.checked })} />
                     </div>
                 </div>
                 <div

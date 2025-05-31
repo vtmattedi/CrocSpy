@@ -9,6 +9,7 @@ const ThemeContext = createContext(undefined);
 export const ThemeProvider = ({ children }) => {
     const [theme, _setTheme] = useState('light');
     const [locale, _setLocale] = useState('en-US');
+    const [forceEnable, setForceEnable] = useState(false)
     const { i18n } = useTranslation();
 
     // Toggle between light and dark theme
@@ -64,7 +65,7 @@ export const ThemeProvider = ({ children }) => {
                 i18n.changeLanguage(localLocale);
             }
             else {
-                 i18n.changeLanguage('en-US');
+                i18n.changeLanguage('en-US');
             }
         }
         else {
@@ -75,22 +76,32 @@ export const ThemeProvider = ({ children }) => {
             else {
                 // If translations are not enabled, set the locale to 'en-US'
                 _setLocale('en-US');
+                i18n.changeLanguage('en-US')
             }
         }
 
     }
     // set the locale from external source
     const setLocale = (newLocale) => {
-        //Maybe add some validation here
-        i18n.changeLanguage(newLocale);
-        _setLocale(newLocale);
-        saveState(theme, newLocale);
+        if (process.env.REACT_APP_USE_TRANSLATION === 'true' || forceEnable) {
+                                    }
+                                    //Maybe add some validation here
+                                    i18n.changeLanguage(newLocale);
+                                    _setLocale(newLocale);
+                                    saveState(theme, newLocale);
+                                    else {
+
+                                        addAlert({
+                                            title: 'English Only',
+                                            text: `Altough this button is here, the app is only available in English for now.\n Once the translations are ready, the app will automatically swap to the prefered language.`,
+                                        })
+                                    }
     }
     useEffect(() => {
         loadState();
     }, []);
     return (
-        <ThemeContext.Provider value={{ theme, toggleTheme, locale, setLocale }}>
+        <ThemeContext.Provider value={{ theme, toggleTheme, locale, setLocale, forceEnable, setForceEnable }}>
             {children}
         </ThemeContext.Provider>
     );
