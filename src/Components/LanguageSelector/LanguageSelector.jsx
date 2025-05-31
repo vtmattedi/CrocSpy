@@ -36,11 +36,8 @@ const LanguageSelector = (props) => {
 
                                 onClick={() => {
                                     //console.log("Language: ", language.locale);
-
                                     setLocale(language.locale);
-                                    
-                                }
-                                }>
+                                }}>
                                 <div className={styles.languageItem}>
                                     <ReactCountryFlag countryCode={language.flag} svg />
                                     <p>{language.name}</p>

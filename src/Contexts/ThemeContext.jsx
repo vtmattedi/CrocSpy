@@ -83,20 +83,19 @@ export const ThemeProvider = ({ children }) => {
     }
     // set the locale from external source
     const setLocale = (newLocale) => {
-        if (process.env.REACT_APP_USE_TRANSLATION === 'true' || forceEnable) {
-                                    
-                                    //Maybe add some validation here
-                                    i18n.changeLanguage(newLocale);
-                                    _setLocale(newLocale);
-                                    saveState(theme, newLocale);
+        if (process.env.REACT_APP_USE_TRANSLATION === 'true') {               
+            //Maybe add some validation here
+            i18n.changeLanguage(newLocale);
+            _setLocale(newLocale);
+            saveState(theme, newLocale);
         }
         else {
 
-                                        addAlert({
-                                            title: 'English Only',
-                                            text: `Altough this button is here, the app is only available in English for now.\n Once the translations are ready, the app will automatically swap to the prefered language.`,
-                                        })
-                                    }
+            addAlert({
+                title: 'English Only',
+                text: `Altough this button is here, the app is only available in English for now.\n Once the translations are ready, the app will automatically swap to the prefered language.`,
+            })
+        }
     }
     useEffect(() => {
         loadState();
