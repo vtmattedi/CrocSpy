@@ -1,6 +1,6 @@
 
 const CACHE_NAME = 'croc-spy-cache';
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v3';
 
 // Files to be cached by the service worker
 // Do not remove the comments below, they are used by postbuild.js to inject the file list

@@ -1,30 +1,42 @@
 .bar {
     position: fixed;
-    bottom: 0 ;
+    bottom: -1px;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     z-index: 10000;
     left: 0;
     right: 0;
-    margin-bottom: 0;
     background-color: var(--background-color);
+    border-top: 1px solid #555;
+    box-shadow: 0px -1px 10px #555;
+
+    border-radius: 10px 10px 0 0;
 }
-:root{
+
+:root {
     --ios-border-radius: 10px;
 }
-.iosBar{
-    bottom: 0.5em;
-    width: 95%;
+
+.iosBar {
     margin: auto;
-    background-color: #999999;
-    border-radius: var(--ios-border-radius);
-    color: #000;
+    background-color: var(--background-color);
+
 }
 
+.barAlt {
+    background-color: #999;
+    color: black;
+    border-top: 1px solid #999;
+    box-shadow: 0px -1px 10px #999;
+}
 
+.slotActive {
+    color: var(--accent-color);
+}
 
 .slot {
     display: flex;
@@ -32,25 +44,29 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
-    border: 1px solid #000;
-    height: 4em;
+    height: 3em;
 }
 
 .slotIosLeft {
     border-radius: var(--ios-border-radius) 0 0 var(--ios-border-radius);
 }
+
 .slotIosRight {
-     border-radius: 0px var(--ios-border-radius) var(--ios-border-radius) 0;
+    border-radius: 0px var(--ios-border-radius) var(--ios-border-radius) 0;
 }
 
 .slot:hover {
-    background-color: #f0f0f0;
-    color: black;
     cursor: pointer;
 }
 
 .icon {
     font-size: 1.5em;
+}
+
+.border {
+
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .setting {
@@ -113,6 +129,15 @@ i {
     height: '4em';
     background-color: 'argb(255, 255, 255, 0)',
 }
+
 .iosSpaceReserve {
-   height: 5em;
+    height: 5em;
+}
+
+.container {
+    margin-top: 0px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: top;
+    width: 100%;
 }

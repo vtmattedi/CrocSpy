@@ -5,7 +5,7 @@ import { useTheme } from '../../Contexts/ThemeContext';
 import { Button } from 'react-bootstrap';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import ThemeButton from '../ThemeButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import usePageWidth from '../../Hooks/PageWidth';
 import AdminPanel from '../AdminPanel/AdminPanel';
 import { useGlobalContext } from '../../Contexts/GlobalContext';
@@ -21,11 +21,28 @@ const MobileFooter = () => {
     const [showAdmin, setShowAdmin] = useState(false);
     const navigator = useNavigate();
     const [ios, setIos] = useState(false);
-
+    const location = useLocation();
     const [showSettings, setShowSettings] = useState(false);
-    const { slots, forceIos } = useGlobalContext();
+    const { slots, testAB } = useGlobalContext();
     const handleClick = (page) => {
         navigator('/' + page);
+    }
+    const isActive = (page) => {
+        const loc = '/' + location.pathname.split('/')[1].toLowerCase();
+        if (page === 'Home') {
+            return loc === '/' || loc === '/home';
+        }
+        if (page === 'Map') {
+            return loc === '/map';
+        }
+        if (page === 'Identify') {
+            const valid = ['/identify', '/upload', '/result', '/camera'];
+            return valid.some(path => loc.startsWith(path));
+        }
+        if (page === 'Info') {
+            const valid = ['/info', '/howto'];
+            return valid.some(path => loc.startsWith(path));
+        }
     }
 
     useEffect(() => {
@@ -33,40 +50,79 @@ const MobileFooter = () => {
         if (agent.includes('iPhone') || agent.includes('iPod')) {
             setIos(true);
         } else {
-            setIos(false);
+            setIos(testAB.forceios);
         }
-    }, []);
+    }, [testAB.forceios]);
+
     useEffect(() => {
         console.log('ios', ios);
     }, [ios]);
-
+    const getHeight = (plus) => {
+        let base = 3
+        if (plus)
+            base += plus;
+        if (testAB.biggericons)
+            base += 1;
+        if (testAB.iconstext)
+            base += 1;
+        return `${base}em`;
+    }
     return (
 
         mobile ? (
             <>
-                <div className={`${styles.spaceReserve}  ${((ios || forceIos)? styles.iosSpaceReserve : "")}`}></div>
-                <div className={`${styles.bar}  ${((ios || forceIos)? styles.iosBar : "")}`}>
-                    {slots.map((page, index) => (
-                        <div key={index} className={`${styles.slot}  ${((ios || forceIos) && index === 0 ? styles.slotIosLeft : "")} ${((ios || forceIos) && index === slots.length-1 ? styles.slotIosRight: "")}`}
-                            onClick={() => {
-                                if (page.name === 'Settings') {
-                                    setShowSettings(true);
-                                    return;
+                <div className={`${styles.spaceReserve}  ${(ios ? styles.iosSpaceReserve : "")}`}
+                    style={{height: getHeight(ios ? 2 : 1)}}
+                ></div>
+                <div className={`${styles.bar}  ${(testAB.altcolor ? styles.barAlt : "")}`}
+                
+                >
+                    <div className={`${styles.container}  ${(ios ? styles.iosContainer : "")}`} data-bs-theme={theme}
+                      style={{
+                        height: getHeight( ios? 2 : 1),
+                      }}
+                    >
+                        {slots.map((page, index) => (
+                            <div key={index} className={`${styles.slot}  } ${styles.border}`}
+                                style={{
+                                    borderLeft: testAB.border && index !== 0 ? '1px solid' : '0px',
+                                    borderBottom: testAB.border ? '1px solid' : '0px',
+                                    backgroundColor: (page.name === 'Settings' && showSettings) ? (testAB.altcolor ? '#888' : 'var(--bs-secondary-bg)') : '',
+                                    borderRadius: index === 0 ? '10px 0 0px 0px' : (index === slots.length - 1 ? '0 10px 0 0' : '0'),
+                                    height: getHeight(),
+                                }}
+                                onClick={() => {
+                                    if (page.name === 'Settings') {
+                                        setShowSettings((prev) => !prev);
+                                        return;
+                                    }
+                                    else {
+                                        setShowSettings(false);
+                                        handleClick(page.name);
+                                    }
+                                }}>
+                                <div className={`${(isActive(page.name) ? styles.slotActive : "")} ${styles.icon}`}
+                                    style={{
+                                        fontSize: testAB.biggericons ? '2em' : '1.5em',
+                                        color: isActive(page.name) ? (testAB.altcolor ? 'var(--accent-color)' : 'var(--accent-color-alt)' ) : (testAB.altcolor ? 'black' : 'white'),
+                                        }}>
+                                    <i className={page.icon}></i>
+                                </div>
+                                {
+                                    testAB.iconstext &&
+                                    <span className={styles.text}
+                                        style={{
+                                            fontWeight: isActive(page.name) ? 'bold' : 'normal',
+                                        }}
+                                    >
+                                        <Translated path={page.text} as='none' />
+                                    </span>
                                 }
-                                else {
-                                    setShowSettings(false);
-                                    handleClick(page.name);
-                                }
-                            }}>
-                            <div className={styles.icon}>
-                                <i className={page.icon}></i>
+
                             </div>
-                            <span className={styles.text}>
-                                <Translated path={page.text} as='none' />
-                            </span>
-                        </div>
-                    ))
-                    }
+                        ))
+                        }
+                    </div>
                     <Offcanvas show={showSettings} onHide={() => setShowSettings(false)} placement='end' data-bs-theme={theme} style={{
                         maxWidth: '80%',
                         color: theme === 'dark' ? 'white' : 'black'

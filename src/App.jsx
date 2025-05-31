@@ -6,9 +6,10 @@ import 'font-awesome/css/font-awesome.min.css';
 import { useTheme } from './Contexts/ThemeContext';
 
 function App({ children }) {
-  const {theme} = useTheme();
+  const { theme } = useTheme();
   return (
     <div className={'App'}>
+      
       {children}
     </div >
   )

@@ -10,7 +10,7 @@ import Version from '../../version';
 const AdminPanel = ({ show, setShow, setShowParent }) => {
     const navigator = useNavigate();
     const { theme } = useTheme();
-    const { addAlert, forceIos, setForceIos } = useGlobalContext();
+    const { addAlert, testAB, setTestAB } = useGlobalContext();
     const pages = [
         { name: '404', path: '/404' },
         { name: 'Install App', path: '/howto/installapp' },
@@ -20,7 +20,7 @@ const AdminPanel = ({ show, setShow, setShowParent }) => {
     ];
     if (process.env.NODE_ENV === 'development') pages.push({ name: 'Test', path: '/test' });
 
-    
+
     const getDatediff = () => {
         const date1 = new Date(Version.buildDate);
         const date2 = new Date(new Date().toUTCString()); // convert date2 to gmt 0 (assume -3 gmt)
@@ -30,12 +30,14 @@ const AdminPanel = ({ show, setShow, setShowParent }) => {
         return `${diffMinutes} Hours ago`;
     }
     return (
-        <Offcanvas show={show} onHide={() => setShow(false)} placement='end' data-bs-theme={theme} style={{ maxWidth: '80%' }} >
+        <Offcanvas show={show} onHide={() => setShow(false)} placement='end' data-bs-theme={theme}
+            style={{ overflowY: 'scroll', height: '100vh', maxWidth: '80%' }}
+        >
             <Offcanvas.Header closeButton>
                 <Offcanvas.Title><span className='bi bi-gear-fill' style={{ marginRight: '10px' }} />Admin Panel</Offcanvas.Title>
             </Offcanvas.Header>
 
-            <Offcanvas.Body>
+            <Offcanvas.Body >
                 <div className='d-flex flex-column align-items-center'>
                     <h5>Pages</h5>
                 </div>
@@ -54,7 +56,7 @@ const AdminPanel = ({ show, setShow, setShowParent }) => {
                         })
                     }
                 </div>
-               
+
                 <div className='d-flex flex-column align-items-center mt-3'>
                     <h5 style={{ textDecoration: 'underline', textDecorationColor: 'red' }}>Danger</h5>
                 </div>
@@ -91,10 +93,41 @@ const AdminPanel = ({ show, setShow, setShowParent }) => {
                     <span style={{ fontSize: '1em' }}>{getDatediff()}</span>
                 </div>
                 <div className='d-flex align-items-center mt-1 justify-content-center align-items-center gap-2'>
-                    Force iOS: 
-                    <div className='form-check form-switch' style={{alignContent:"center"}} >
-                    <input type='checkbox' className='form-check-input' checked={forceIos} onChange={(e) => setForceIos(e.target.checked)} />
+                    Force iOS:
+                    <div className='form-check form-switch' style={{ alignContent: "center" }} >
+                        <input type='checkbox' className='form-check-input' checked={testAB.forceios} onChange={(e) => setTestAB((prev) => { return { ...prev, forceios: e.target.checked } })} />
                     </div>
+                </div>
+                <div className='d-flex align-items-center mt-1 justify-content-center align-items-center gap-2'>
+                    Border:
+                    <div className='form-check form-switch' style={{ alignContent: "center" }} >
+                        <input type='checkbox' className='form-check-input' checked={testAB.border} onChange={(e) => setTestAB((prev) => { return { ...prev, border: e.target.checked } })} />
+                    </div>
+                </div>
+                <div className='d-flex align-items-center mt-1 justify-content-center align-items-center gap-2'>
+                    Alt color:
+                    <div className='form-check form-switch' style={{ alignContent: "center" }} >
+                        <input type='checkbox' className='form-check-input' checked={testAB.altcolor} onChange={(e) => setTestAB({ ...testAB, altcolor: e.target.checked })} />
+                    </div>
+                </div>
+                <div className='d-flex align-items-center mt-1 justify-content-center align-items-center gap-2'>
+                    Bigger Icons:
+                    <div className='form-check form-switch' style={{ alignContent: "center" }} >
+                        <input type='checkbox' className='form-check-input' checked={testAB.biggericons} onChange={(e) => setTestAB({ ...testAB, biggericons: e.target.checked })} />
+                    </div>
+                </div>
+                <div className='d-flex align-items-center mt-1 justify-content-center align-items-center gap-2'>
+                    Icons With Text:
+                    <div className='form-check form-switch' style={{ alignContent: "center" }} >
+                        <input type='checkbox' className='form-check-input' checked={testAB.iconstext} onChange={(e) => setTestAB({ ...testAB, iconstext: e.target.checked })} />
+                    </div>
+                </div>
+                <div
+                    style={{
+                        height: '15em',
+                    }}
+                >
+
                 </div>
             </Offcanvas.Body>
         </Offcanvas>

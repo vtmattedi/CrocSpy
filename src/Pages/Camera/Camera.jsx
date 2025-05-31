@@ -7,7 +7,7 @@ import { useGlobalContext } from '../../Contexts/GlobalContext';
 import { useTheme } from '../../Contexts/ThemeContext';
 import { Modal } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { data, useNavigate } from 'react-router-dom';
 import useSound from 'use-sound';
 import shutterMp3 from './Assets/shutter.mp3';
 import NoCamera from './NoCameras/NoCameras';
@@ -31,6 +31,13 @@ const CameraPage = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
     const [error, setError] = useState(false);
+    const [gps, setGps] = useState({
+        data: {
+            GPSLatitude: null,
+            GPSLongitude: null,
+        },
+        time: null
+    });
 
 
     const aspectRatioOptions = [
@@ -47,6 +54,33 @@ const CameraPage = () => {
             bytes[i] = binaryString.charCodeAt(i);
         }
         return bytes.buffer;
+    }
+
+    const getGpsData = async (photo) => {
+        const now = new Date().getTime();
+        if (gps.time && (now - gps.time < 60000)) {
+            return gps.data;
+        }
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const data = {
+                    GPSLatitude: position.coords.latitude,
+                    GPSLongitude: position.coords.longitude,
+                };
+                setGps({ data, time: now });
+                return data;
+            },
+            (error) => {
+                console.error('Error getting GPS data:', error);
+                addAlert({
+                    title: 'Error getting geo location',
+                    text: 'We were unable to get your location. Please check your location settings. This photo will be saved without location data.',
+                    onClose: () => { }
+                });
+                return { GPSLatitude: null, GPSLongitude: null };
+            }
+        );
+
     }
 
     useEffect(() => {
@@ -74,45 +108,17 @@ const CameraPage = () => {
             const photo = camera.current.takePhoto();
             setImage(photo);
             setShowPreview(true);
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    savePhoto(photo, {
-                        GPSLatitude: position.coords.latitude,
-                        GPSLongitude: position.coords.longitude,
-                    }).then((id) => {
-                        setPhotoId(id);
-                    }).catch((err) => {
-                        addAlert({
-                            title: 'Error saving photo',
-                            text: 'We were unable to save the photo. Please try again later.\n#rror Message:\n' + err.message,
-                            onClose: () => { hidePreview() }
-                        });
-                    }
-                    );
-                },
-                (error) => {
+            getGpsData(photo).then((gpsData) => {
+                savePhoto(photo, gpsData).then((id) => {
+                    setPhotoId(id);
+                }).catch((err) => {
                     addAlert({
-                        title: 'Error getting geo location',
-                        text: 'We were unable to get your location. Please check your location settings. This photo will be saved without location data.',
-                        onClose: () => { }
+                        title: 'Error saving photo',
+                        text: 'We were unable to save the photo. Please try again later.\n#rror Message:\n' + err.message,
+                        onClose: () => { hidePreview() }
                     });
-                    savePhoto(photo, {
-                        GPSLatitude: null,
-                        GPSLongitude: null,
-                    }).then((id) => {
-                        setPhotoId(id);
-                    }).catch((err) => {
-                        console.log(err);
-                        addAlert({
-                            title: 'Error saving photo',
-                            text: 'We were unable to save the photo. Please try again later.\nError Message:\n' + err.message,
-                            onClose: () => { hidePreview() }
-                        });
-                    }
-                    );
-
-                }
-            )
+                });
+            });
 
         }
     }
@@ -186,13 +192,13 @@ const CameraPage = () => {
                                 >
                                     <div className={'bi' + light ? 'bi-lightning-fill' : 'bi-lightning'} /></button>
 
-                                <Button
+                                {/* <Button
                                     onClick={() => {
                                         setShowConfig(true);
                                     }}
                                 >
                                     <div className={'bi bi-gear'} /></Button>
-
+ */}
 
 
                             </div>
@@ -239,8 +245,8 @@ const CameraPage = () => {
                             }}
                         >
                             {aspectRatioOptions.map((option, index) => (
-                                <option key={'aropt_' + index} value={option.value} 
-                                selected={option.value === aspectRatio || (option.value === -1 && !aspectRatioOptions.find((option) => option.value === aspectRatio))}>
+                                <option key={'aropt_' + index} value={option.value}
+                                    selected={option.value === aspectRatio || (option.value === -1 && !aspectRatioOptions.find((option) => option.value === aspectRatio))}>
                                     {option.label}
                                 </option>
                             ))}
@@ -261,7 +267,7 @@ const CameraPage = () => {
                 </Modal.Title>
                 <Modal.Body
                     style={{ maxHeight: '70vh', overflowY: 'auto' }}>
-                        <ImgEqualizer src={image} alt='Image preview' width= "100%" height="60vh" bgColor="0"  />
+                    <ImgEqualizer src={image} alt='Image preview' width="100%" height="60vh" bgColor="0" />
                 </Modal.Body>
                 <Modal.Footer>
                     {
@@ -273,7 +279,7 @@ const CameraPage = () => {
                             }} >
                                 <Translated path='basics.save' as='none' />
 
-                                </Button>
+                            </Button>
                             <Button onClick={() => {
                                 navigate('/Upload/' + photoId);
 

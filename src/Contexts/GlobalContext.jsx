@@ -18,9 +18,9 @@ const defaultSlots = [
     { icon: 'bi bi-gear', name: 'Settings', text: 'navigation.setting' },
 
 ];
-if (process.env.NODE_ENV === 'development') {
-    defaultSlots.push({ icon: 'bi bi-map', name: 'Explore', text: 'navigation.explore' });
-}
+// if (process.env.NODE_ENV === 'development') {
+//     defaultSlots.push({ icon: 'bi bi-map', name: 'Explore', text: 'navigation.explore' });
+// }
 export const GlobalProvider = ({ children }) => {
     const [loadingText, setLoadingText] = useState(null);
     const [alertStack, setAlertStack] = useState([]);
@@ -28,7 +28,13 @@ export const GlobalProvider = ({ children }) => {
     const [showLoading, setShowLoading] = useState(true);
     const [slots, setSlots] = useState(defaultSlots)
     const [offline, setOffline] = useState(false);
-    const [forceIos, setForceIos] = useState(false);
+    const [testAB, _setTestAB] = useState({
+        forceios: false,
+        border: false,
+        altcolor: false,
+        biggericons: false,
+        iconstext: false,
+    });
     const { mobile } = usePageWidth();
     const [toastData, setToastData] = useState({
         show: false,
@@ -38,6 +44,10 @@ export const GlobalProvider = ({ children }) => {
         text: 'You should never see this message, it is just a placeholder',
         time: 'a long long time ago',
     });
+    const setTestAB = (obj) => {
+        _setTestAB(obj);
+        localStorage.setItem('testAB', JSON.stringify(obj));
+    }
     const getCurrentAlert = () => {
         return alertStack.length > 0 ? alertStack[alertStack.length - 1] : null;
     }
@@ -140,6 +150,17 @@ export const GlobalProvider = ({ children }) => {
 
 
     useEffect(() => {
+        const storedTestAB = localStorage.getItem('testAB');
+        if (storedTestAB) {
+            try {
+                const parsedTestAB = JSON.parse(storedTestAB);
+                _setTestAB(parsedTestAB);
+            }
+            catch (e) {
+                console.error('Error parsing testAB from localStorage:', e);
+            }
+        }
+        
         const setInternet = (status) => {
             const online = status === 'online';
             setOffline(!online);
@@ -174,7 +195,7 @@ export const GlobalProvider = ({ children }) => {
 
     const { theme } = useTheme();
     return (
-        <GlobalContext.Provider value={{ addAlert, closeAlert, getCurrentAlert, savePhoto, deletePhoto, editPhoto, slots, setSlots, offline, forceIos, setForceIos }}>
+        <GlobalContext.Provider value={{ addAlert, closeAlert, getCurrentAlert, savePhoto, deletePhoto, editPhoto, slots, setSlots, offline,testAB, setTestAB }}>
             {children}
             <ToastContainer
                 className="p-3"
