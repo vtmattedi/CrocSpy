@@ -84,12 +84,13 @@ export const ThemeProvider = ({ children }) => {
     // set the locale from external source
     const setLocale = (newLocale) => {
         if (process.env.REACT_APP_USE_TRANSLATION === 'true' || forceEnable) {
-                                    }
+                                    
                                     //Maybe add some validation here
                                     i18n.changeLanguage(newLocale);
                                     _setLocale(newLocale);
                                     saveState(theme, newLocale);
-                                    else {
+        }
+        else {
 
                                         addAlert({
                                             title: 'English Only',
