@@ -7,7 +7,7 @@ import availableLanguages from '../../Translations/availableLenguages';
 import { useGlobalContext } from '../../Contexts/GlobalContext';
 import { use } from 'react';
 const LanguageSelector = (props) => {
-    const { theme, locale, setLocale } = useTheme();
+    const { theme, locale, setLocale, forceEnable } = useTheme();
     const { addAlert } = useGlobalContext();
     const invertedTheme = (t) => {
         if (t === 'light') {
@@ -37,8 +37,7 @@ const LanguageSelector = (props) => {
                                 onClick={() => {
                                     if (process.env.REACT_APP_USE_TRANSLATION === 'true' || forceEnable) {
                                         //Maybe add some validation here
-                                        s
-                                        etLocale(language.locale);
+                                        setLocale(language.locale);
                                     }
                                     else {
                                         addAlert({
