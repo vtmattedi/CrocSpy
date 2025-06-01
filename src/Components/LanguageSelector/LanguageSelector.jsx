@@ -42,7 +42,7 @@ const LanguageSelector = (props) => {
                                     else {
                                         addAlert({
                                             title: 'English Only',
-                                            text: `Altough this button is here, the app is only available in English for now.\n Once the translations are ready, the app will automatically swap to the prefered language.`,
+                                            text: `Altough this button is here, the app is only available in English for now.\n Once the translations are ready, the app will automatically swap to the prefered language. you can enable parcial translations in the admin panel.`,
                                         })
                                     }
                                     //console.log("Language: ", language.locale);
