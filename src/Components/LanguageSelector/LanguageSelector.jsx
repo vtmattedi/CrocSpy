@@ -16,7 +16,7 @@ const LanguageSelector = (props) => {
             return 'light';
         }
     }
-   
+
     return (
         <Dropdown data-bs-theme={invertedTheme(theme)}>
             <Dropdown.Toggle id="dropdown-split-basic" data-bs-theme={invertedTheme(theme)}
@@ -35,8 +35,18 @@ const LanguageSelector = (props) => {
                             <Dropdown.Item key={language.locale}
 
                                 onClick={() => {
+                                    if (process.env.REACT_APP_USE_TRANSLATION === 'true' || forceEnable) {
+                                        //Maybe add some validation here
+                                        s
+                                        etLocale(language.locale);
+                                    }
+                                    else {
+                                        addAlert({
+                                            title: 'English Only',
+                                            text: `Altough this button is here, the app is only available in English for now.\n Once the translations are ready, the app will automatically swap to the prefered language.`,
+                                        })
+                                    }
                                     //console.log("Language: ", language.locale);
-                                    setLocale(language.locale);
                                 }}>
                                 <div className={styles.languageItem}>
                                     <ReactCountryFlag countryCode={language.flag} svg />

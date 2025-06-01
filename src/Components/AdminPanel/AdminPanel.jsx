@@ -99,35 +99,11 @@ const AdminPanel = ({ show, setShow, setShowParent }) => {
                     </div>
                 </div>
                 <div className='d-flex align-items-center mt-1 justify-content-center align-items-center gap-2'>
-                    Border:
-                    <div className='form-check form-switch' style={{ alignContent: "center" }} >
-                        <input type='checkbox' className='form-check-input' checked={testAB.border} onChange={(e) => setTestAB((prev) => { return { ...prev, border: e.target.checked } })} />
-                    </div>
-                </div>
-                <div className='d-flex align-items-center mt-1 justify-content-center align-items-center gap-2'>
-                    Alt color:
-                    <div className='form-check form-switch' style={{ alignContent: "center" }} >
-                        <input type='checkbox' className='form-check-input' checked={testAB.altcolor} onChange={(e) => setTestAB({ ...testAB, altcolor: e.target.checked })} />
-                    </div>
-                </div>
-                <div className='d-flex align-items-center mt-1 justify-content-center align-items-center gap-2'>
-                    Bigger Icons:
-                    <div className='form-check form-switch' style={{ alignContent: "center" }} >
-                        <input type='checkbox' className='form-check-input' checked={testAB.biggericons} onChange={(e) => setTestAB({ ...testAB, biggericons: e.target.checked })} />
-                    </div>
-                </div>
-                <div className='d-flex align-items-center mt-1 justify-content-center align-items-center gap-2'>
-                    Icons With Text:
-                    <div className='form-check form-switch' style={{ alignContent: "center" }} >
-                        <input type='checkbox' className='form-check-input' checked={testAB.iconstext} onChange={(e) => setTestAB({ ...testAB, iconstext: e.target.checked })} />
-                    </div>
-                </div>
-                {/* <div className='d-flex align-items-center mt-1 justify-content-center align-items-center gap-2'>
                     Enable parcial Translations:
                     <div className='form-check form-switch' style={{ alignContent: "center" }} >
-                        <input type='checkbox' className='form-check-input' checked={forceEnable} onChange={(e) => ssetForceEnable(e.target.checked)} />
+                        <input type='checkbox' className='form-check-input' checked={forceEnable} onChange={(e) => setForceEnable(e.target.checked)} />
                     </div>
-                </div> */}
+                </div>
                 <div className='d-flex align-items-center mt-1 justify-content-center align-items-center gap-2'>
                     No Margin Bottom:
                     <div className='form-check form-switch' style={{ alignContent: "center" }} >

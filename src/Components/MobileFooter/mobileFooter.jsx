@@ -29,6 +29,7 @@ const MobileFooter = () => {
     }
     const isActive = (page) => {
         const loc = '/' + location.pathname.split('/')[1].toLowerCase();
+        if (showSettings) return false;
         if (page === 'Home') {
             return loc === '/' || loc === '/home';
         }
@@ -52,7 +53,8 @@ const MobileFooter = () => {
         } else {
             setIos(testAB.forceios);
         }
-    }, [testAB.forceios]);
+
+    }, [testAB.forceios]); 
 
     useEffect(() => {
         console.log('ios', ios);
@@ -74,22 +76,15 @@ const MobileFooter = () => {
                 <div className={`${styles.spaceReserve}  ${(ios ? styles.iosSpaceReserve : "")}`}
                     style={{height: getHeight(ios ? 2 : 1)}}
                 ></div>
-                <div className={`${styles.bar}  ${(testAB.altcolor ? styles.barAlt : "")}`}
-                
-                >
+                <div className={`${styles.bar}  ${(styles.barAlt)}`}>
                     <div className={`${styles.container}  ${(ios ? styles.iosContainer : "")}`} data-bs-theme={theme}
                       style={{
-                        height: getHeight(( ios? 2 : 1) - testAB.noMargin ? 1:0),
-                      }}
-                    >
+                        height: getHeight(( ios ? 2 : 1) - testAB.noMargin ? 1:0),
+                      }}>
                         {slots.map((page, index) => (
-                            <div key={index} className={`${styles.slot}  } ${styles.border}`}
+                            <div key={index} className={`${styles.slot}  } `}
                                 style={{
-                                    borderLeft: testAB.border && index !== 0 ? '1px solid' : '0px',
-                                    borderBottom: testAB.border ? '1px solid' : '0px',
-                                    backgroundColor: (page.name === 'Settings' && showSettings) ? (testAB.altcolor ? '#888' : 'var(--bs-secondary-bg)') : '',
-                                    borderRadius: index === 0 ? '10px 0 0px 0px' : (index === slots.length - 1 ? '0 10px 0 0' : '0'),
-                                    height: getHeight(),
+                                   height: getHeight(),
                                 }}
                                 onClick={() => {
                                     if (page.name === 'Settings') {
@@ -103,8 +98,8 @@ const MobileFooter = () => {
                                 }}>
                                 <div className={`${(isActive(page.name) ? styles.slotActive : "")} ${styles.icon}`}
                                     style={{
-                                        fontSize: testAB.biggericons ? '2em' : '1.5em',
-                                        color: isActive(page.name) ? (testAB.altcolor ? 'var(--accent-color)' : 'var(--accent-color-alt)' ) : (testAB.altcolor ? 'black' : 'white'),
+                                        fontSize: "1.75em",
+                                        color: page.name == 'Settings' && showSettings? 'var(--accent-color)' : ( isActive(page.name) ? 'var(--accent-color)' : 'black' ),
                                         }}>
                                     <i className={page.icon}></i>
                                 </div>

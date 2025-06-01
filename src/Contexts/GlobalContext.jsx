@@ -13,7 +13,7 @@ const defaultSlots = [
     { icon: 'bi bi-house', name: 'Home', text: 'navigation.home' },
     { icon: 'bi bi-pin-map', name: 'Map', text: 'navigation.map' },
     // { icon: 'bi bi-camera2', text: 'Camera' },
-    { icon: 'bi bi-search', name: 'Identify', text: 'navigation.identify' },
+    { icon: 'bi bi-camera2', name: 'Identify', text: 'navigation.identify' },
     { icon: 'bi bi-info-circle', name: 'Info', text: 'navigation.info' },
     { icon: 'bi bi-gear', name: 'Settings', text: 'navigation.setting' },
 
